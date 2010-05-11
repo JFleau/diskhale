@@ -1,0 +1,106 @@
+# KDE Config File
+[KDE]
+contrast=2
+[Custom Colors]
+Color8=192,192,192
+Color9=192,192,192
+Color10=192,192,192
+Color11=192,192,192
+Color12=192,192,192
+Color13=192,192,192
+Color14=192,192,192
+Color15=192,192,192
+Color16=192,192,192
+Color17=192,192,192
+Color0=192,192,192
+Color1=192,192,192
+Color2=192,192,192
+Color3=192,192,192
+Color4=192,192,192
+Color5=192,192,192
+Color6=192,192,192
+Color7=192,192,192
+[Global Keys]
+Kill window mode=CTRL+ALT+Escape
+Pop-up system menu=Menu
+Window toggle sticky=
+Window move=
+Task manager=CTRL+Escape
+Switch one desktop to the left=
+Window resize=
+Switch one desktop down=
+Window raise=
+Switch one desktop up=
+Switch to desktop 1=CTRL+F1
+Switch to desktop 2=CTRL+F2
+Switch to desktop 3=CTRL+F3
+Switch to desktop 4=CTRL+F4
+Switch to desktop 5=CTRL+F5
+Pop-up window operations menu=ALT+F3
+Switch to desktop 6=CTRL+F6
+Switch to desktop 7=CTRL+F7
+Switch one desktop to the right=
+Switch to desktop 8=CTRL+F8
+Execute command=ALT+F2
+Window close=ALT+F4
+Window lower=
+Window iconify=
+[WM]
+activeBlend=255,215,0
+inactiveBackground=237,237,237
+activeBackground=255,215,0
+inactiveBlend=237,237,237
+inactiveForeground=0,0,0
+activeForeground=0,0,0
+[Standard Keys]
+Pop-up system menu=Menu
+End=CTRL+End
+Next=PageDown
+Copy=CTRL+C
+Close=CTRL+W
+Find=CTRL+F
+Quit=CTRL+Q
+Insert=CTRL+Insert
+Undo=CTRL+Z
+Print=CTRL+P
+Open=CTRL+O
+Replace=CTRL+R
+Help=F1
+Cut=CTRL+X
+Save=CTRL+S
+Prior=PageUp
+Home=CTRL+Home
+New=CTRL+N
+Paste=CTRL+V
+[Locale]
+Language=
+[General Font]
+Weight=75
+Italic=0
+Family=helvetica
+Point Size=10
+[GUI Style]
+Style=Motif
+[General]
+foreground=0,0,0
+selectForeground=0,0,0
+selectBackground=168,168,168
+background=213,216,217
+windowForeground=0,0,0
+windowBackground=255,255,255
+[Color Scheme]
+BackgroundColor=#ffcda2
+ActiveTitleTextColor=#ffffff
+TextColor=#000000
+SelectColor=#6f7a63
+InactiveTitleBarColor=#000000
+ActiveTitleBarColor=#6f7a63
+Contrast=5
+InactiveTitleTextColor=#afb49f
+WindowTextColor=#000000
+WindowColor=#ffffff
+SelectTextColor=#ffffff
+[KFileDialog Settings]
+PannerPosition=30
+Width=440
+Height=420
