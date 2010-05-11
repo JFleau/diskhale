@@ -1,0 +1,2 @@
+#mailcap entry added by Netscape Helper
+application/msword; ns="%s"\; nf="${ns}".html\;mswordview "${ns}" >"${nf}"\; netscape -remote 'openURL(file:'"${nf}"')' \; sleep 2 \; rm "${nf}"
