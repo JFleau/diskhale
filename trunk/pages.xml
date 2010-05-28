@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<pages>
+	  <page>
+	    <name>welcome</name>
+	    <menutitle>Diskhale Classique</menutitle>
+	    <title>Accueil</title>
+	  </page>
+
+          <page>
+              <name>inscription</name>
+              <menutitle>Inscription</menutitle>
+              <title>Inscription</title>
+          </page>
+
+          <page>
+              <name>contact</name>
+              <menutitle>Contact</menutitle>
+              <title>Contact</title>
+          </page>
+          <page>
+              <name>connexion</name>
+              <menutitle>Connexion</menutitle>
+              <title>Connexion</title>
+          </page>
+	</pages>
