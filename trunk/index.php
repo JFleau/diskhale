@@ -1,33 +1,59 @@
 <?php
-echo '<?xml version="1.0" encoding="UTF-8"?>';
-?>
+    session_name("dhc" );
+    // ne pas mettre d'espace dans le nom de session !
+    session_start();
+    if (!isset($_SESSION['initiated'])) {
+        session_regenerate_id();
+        $_SESSION['initiated'] = true;
+    }
+    // Décommenter la ligne suivante pour afficher le tableau $_SESSION pour le debuggage
+    // print_r($_SESSION);
 
-<link rel="stylesheet" type="text/css" href="gabarit.css" />
 
-<?php
-require('utils.php');
+    require ('fonctions/printForms.php');
+    require ('fonctions/logInOut.php');
+    require ('fonctions/utils.php');
+    require ('auth.php');
+
 //reste du code PHP qui appelle les fonctions du fichier utils.php
-?>
-
-<?php
-switch (isset($_GET['page'])) {
-  case 'true': $askedPage=$_GET['page']; break;
-  default: $askedPage=welcome;
-}
-
-$authorized=checkPage($askedPage);
-
-if($authorized){
-    $pageTitle=getPageTitle($askedPage);
-}
-else{
-    $pageTitle="Erreur";
-}
-?>
 
 
 
-<?php
+
+echo '<?xml version="1.0" encoding="UTF-8"?>';
+
+
+echo '<link rel="stylesheet" type="text/css" href="gabarit.css" />';
+
+
+    if($_GET["action"] == "login") {
+  	    logIn();
+    }
+
+    if($_GET["action"] == "logout") {
+  	    logOut();
+    }
+
+
+    
+
+        switch (isset($_GET['page'])) {
+        case 'true': $askedPage=$_GET['page']; break;
+        default: $askedPage=welcome;
+        }
+
+        $authorized=checkPage($askedPage);
+
+        if($authorized){
+            $pageTitle=getPageTitle($askedPage);
+        }
+        else{
+            $pageTitle="Erreur";
+        }
+
+
+
+
     generateHTMLHeader($pageTitle,"gabarit.css");
 ?>
 
@@ -48,21 +74,27 @@ else{
 
 
 <div id="global">
+
     <?php
-  
+        
+       
         if($askedPage=='welcome'){
-            require('content_accueil.php');
+            require('pages/content_accueil.php');
         }
         elseif($askedPage=='inscription'){
-            require('content_inscription.php');
+            require('pages/content_inscription.php');
         }
         elseif($askedPage =='contact'){
-            require('content_contact.php');
+            require('pages/content_contact.php');
         }
         elseif($askedPage =='connexion'){
-            require('content_connexion.php');
+            require('pages/content_connexion.php');
+            
         }
-        else require('erreur.php');
+        elseif($askedPage =='modification'){
+            require('pages/content_modification.php');
+        }
+        else require('pages/erreur.php');
         
     ?>
     
@@ -86,4 +118,11 @@ else{
 
 
 </body>
+
 </html>
+
+<?php
+//if($_SESSION["loggedIn"]) {
+//    }
+   
+    ?>

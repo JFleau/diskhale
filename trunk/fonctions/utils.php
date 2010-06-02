@@ -24,7 +24,12 @@ CHAINE_DE_FIN;
 <?php
     function checkPage($askedPage){
         //Chargement du fichier
-        $xml = simplexml_load_file("pages.xml");
+        if($_SESSION["loggedIn"]) {
+            $xml = simplexml_load_file("pages/pages_connected_user.xml");
+        }
+        else{
+            $xml = simplexml_load_file("pages/pages_user.xml");
+        }
 
 	//Recuperation de l'ensemble des noeuds correspondant aux balises "note"
 	//$tableauDesPages = $xml->page
@@ -46,7 +51,12 @@ CHAINE_DE_FIN;
 <?php
 function getPageTitle($nom){
     //Chargement du fichier
-        $xml = simplexml_load_file("pages.xml");
+        if($_SESSION["loggedIn"]) {
+            $xml = simplexml_load_file("pages/pages_connected_user.xml");
+        }
+        else{
+            $xml = simplexml_load_file("pages/pages_user.xml");
+        }
 
 	//Recuperation de l'ensemble des noeuds correspondant aux balises "note"
 	//$tableauDesPages = $xml->page;
@@ -67,9 +77,14 @@ function getPageTitle($nom){
 }
 
 
-function generateMenu($askedPage){
-    $xml = simplexml_load_file("pages.xml");
-    //echo "<div id=\"navigation\">";
+function generateMenu($askedPage,$logInOut){
+    if(!$logInOut){
+        $xml = simplexml_load_file("pages/pages_user.xml");
+        //echo "<div id=\"navigation\">";
+    }
+    else{
+        $xml = simplexml_load_file("pages/pages_connected_user.xml");
+    }
     echo "<ul>";
     
     foreach($xml as $page){
@@ -89,6 +104,10 @@ function generateMenu($askedPage){
             echo "</a></li>".PHP_EOL;
         }
     }
+    if($logInOut){
+        printLogOutForm();
+    }
+    
     echo "</ul>";
     echo "</div>";
 

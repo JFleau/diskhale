@@ -2,14 +2,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Bienvenue sur le site de la Diskhâle Classique</title>
+    <title>Bienvenue sur le site de la Diskh&acirc;le Classique</title>
 <link rel="stylesheet" type="text/css" href="gabarit.css" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 </head>
 <body>
 
 
-	<div id="entete">Bienvenue sur le site de la Diskhâle Classique</div>
+    <div id="entete">Bienvenue sur le site de la Diskh&acirc;le Classique</div>
 	<div id="centre">
             <div id="centre-bis">
 
@@ -17,12 +17,15 @@
                     <p>Liens externes</p>
                 </div>
                 <div id="principal">
-                    <p>Actualité</p>
+                    <p>Actualit&eacute;</p>
                     <p>Disque du mois</p>
                 </div>
                 <div id="navigation">
                     Menu
-                    <?php generateMenu($askedPage);?>
+                    <?php
+                    $logInOut=$_SESSION["loggedIn"];
+                    generateMenu($askedPage,$logInOut);
+                    ?>
                 </div>
                 
    
