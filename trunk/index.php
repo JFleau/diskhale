@@ -98,7 +98,7 @@ echo '<link rel="stylesheet" type="text/css" href="gabarit.css" />';
             require('pages/content_delete_user.php');
         }
         elseif($askedPage =='recherche'){
-            printSearchForm();
+            
             require('pages/content_recherche.php');
         }
         else require('pages/erreur.php');

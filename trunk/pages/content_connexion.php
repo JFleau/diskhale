@@ -11,7 +11,7 @@ $askedPage='connexion';
 
     }
     
-    if (!$_SESSION["loggedIn"]) {
+    if ($_SESSION["loggedIn"]==0) {
             printLoginForm($askedPage);
     }
 
