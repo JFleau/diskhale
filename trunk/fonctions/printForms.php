@@ -25,11 +25,11 @@ generateHTMLHeader('Connexion','gabarit.css');
                     <table align="center" border="0">
                         <tr>
                         <td>Trigramme
-                        <td><input type=text name="trigramme" size=6 maxlength=6 value="<?php if(isset($_POST["trigramme"])) echo $_POST["trigramme"];?>"><br>
+                        <td><input type=text name="trigramme" size=10 maxlength=10 value="<?php if(isset($_POST["trigramme"])) echo $_POST["trigramme"];?>"><br>
                         </tr>
                         <tr>
                         <td>Mot de passe
-                        <td><input type=password name="mdp1" size=3 maxlength=3 value=""><br>
+                        <td><input type=password name="mdp1" size=10 maxlength=10 value=""><br>
                         </tr>
                         <tr>
                         <td><input type="submit" value="Valider" ><br>
