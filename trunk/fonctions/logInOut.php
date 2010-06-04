@@ -24,24 +24,23 @@
     }
 
     function logAdmin(){
-        
-        if(isset($_POST["trigramme"]) && $_POST["trigramme"]!="" &&
-            isset($_POST["mdp1"]) && $_POST["mdp1"]!="" ){
-                $login=$_POST["trigramme"];
-                $password=$_POST["mdp1"];
-                if($login=="dhc" && $password=="melodix"){
-                    $_SESSION['loggedIn']=2;
-                }
-                else{
-                    echo "D&eacute;sol&eacute;, le site n'est accessible qu'aux gentlemen.";
-                }
 
+
+        $login=$_POST["trigramme"];
+        $password=$_POST["mdp1"];
+        if($login=="dhc" && $password=="melodix"){
+                    $_SESSION['loggedIn']=2;
         }
         else{
-            printAdminForm();
+                   echo "D&eacute;sol&eacute;, le site n'est accessible qu'aux gentlemen.";
         }
-
     }
+
+
+
+
+  
+    
 
 
 

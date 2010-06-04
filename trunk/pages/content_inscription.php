@@ -38,12 +38,14 @@ $form_values_valid=FALSE;
             
 
             if(!isUser($trigramme)){
+                
                 $quer ="INSERT INTO `clients` (`trigramme`, `nom`, `prenom`,`password`,`categorie`,
                 `nbmax`,`remarques`,`email`, `kazert`,`telephone`, `statut`, `cotisation`,`caution`)
                 VALUES('$trigramme', '$nom', '$prenom','$mdp1','$categorie',
                 '5','$remarques','$email', '$kzert','$numero', '$statut', '$cotisation','$caution')";
                 if (!mysql_query($quer)) echo 'Erreur SQL '.mysql_error().': '.$quer;
-                else $_SESSION["loggedIn"];
+                else $_SESSION["loggedIn"]=1;
+               
             }
             else{
                 echo "utilisateur déjà inscrit";

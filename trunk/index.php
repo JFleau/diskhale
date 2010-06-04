@@ -42,14 +42,19 @@ echo '<link rel="stylesheet" type="text/css" href="gabarit.css" />';
         default: $askedPage=welcome;
         }
 
-        $authorized=checkPage($askedPage);
+        $logInOut=$_SESSION["loggedIn"];
+        $authorized=checkPage($askedPage,$logInOut);
 
         if($authorized){
-            $pageTitle=getPageTitle($askedPage);
+            $pageTitle=getPageTitle($askedPage,$logInOut);
         }
         else{
             $pageTitle="Erreur";
         }
+//        echo $pageTitle;
+//        echo $logInOut;
+//        echo $authorized;
+//        echo getPageTitle($askedPage,$logInOut);
 
 
 
@@ -86,7 +91,7 @@ echo '<link rel="stylesheet" type="text/css" href="gabarit.css" />';
             elseif($askedPage =='suppression'){
                 require('pages/content_delete_user.php');
             }
-            if($askedPage=='welcome'){
+            elseif($askedPage=='welcome'){
                 require('pages/content_accueil.php');
             }
             elseif($askedPage=='inscription'){
@@ -104,8 +109,10 @@ echo '<link rel="stylesheet" type="text/css" href="gabarit.css" />';
             elseif($askedPage =='administrateur'){
                 require('pages/content_admin.php');
             }
-            else require('pages/erreur.php');
+            else{
+                require('pages/erreur.php');
             }
+        }
 
 
         elseif($_SESSION["loggedIn"]==2){
@@ -131,7 +138,9 @@ echo '<link rel="stylesheet" type="text/css" href="gabarit.css" />';
             elseif($askedPage =='administrateur'){
                 require('pages/content_admin.php');
             }
-            else require('pages/erreur.php');
+            else{
+                require('pages/erreur.php');
+            }
         }
 
         
@@ -145,9 +154,7 @@ echo '<link rel="stylesheet" type="text/css" href="gabarit.css" />';
     
    
 
-    <p>
-    Contenu de la page.
-    </p>
+    
 </div>
 
 
@@ -169,5 +176,6 @@ echo '<link rel="stylesheet" type="text/css" href="gabarit.css" />';
 <?php
 //if($_SESSION["loggedIn"]) {
 //    }
+echo $_SESSION["loggedIn"];
    
     ?>

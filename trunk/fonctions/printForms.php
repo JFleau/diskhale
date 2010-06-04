@@ -84,7 +84,7 @@ generateHTMLHeader('D&eacute;connexion','gabarit.css');
 ?>
 
 <?php
-function printAdminForm(){
+function printAdminForm($askedPage){
 generateHTMLHeader('Admministrateur','gabarit.css');
 ?>
 
@@ -98,7 +98,7 @@ generateHTMLHeader('Admministrateur','gabarit.css');
                     <p>Liens externes</p>
                 </div>
                 <div id="principal">
-                    <form action="" method="post">
+                    <form action="index.php" method="post">
                     <table align="center" border="0">
                         <tr>
                         <td>Trigramme
@@ -155,7 +155,7 @@ function printRegisterForm($askedPage){
                     <p>Liens externes</p>
                 </div>
                 <div id="principal">
-                    <form action="index.php?action=login<?php if($askedPage!=""){echo "?page=$askedPage";}?>" method=post>
+                    <form action="" method=post>
                     <table align="center" border="0">
                         <tr>
                         <td>Trigramme
@@ -334,7 +334,7 @@ function changepassword($askedPage){
 
 
 <?php
-function printDeleteForm(){
+function printDeleteForm($askedPage){
     generateHTMLHeader('Suppression','gabarit.css');
     ?>
 
@@ -348,7 +348,7 @@ function printDeleteForm(){
                     <p>Liens externes</p>
                 </div>
                 <div id="principal">
-                    <form action="" method="post">
+                    <form action="index.php?action=logout" method="post">
                     <table align="center" border="0">
                         <tr>
                         <td>Trigramme

@@ -22,7 +22,7 @@ CHAINE_DE_FIN;
 
 
 <?php
-    function checkPage($askedPage){
+    function checkPage($askedPage,$logInOut){
         //Chargement du fichier
         if($logInOut==1){
             $xml = simplexml_load_file("pages/pages_connected_user.xml");
@@ -53,7 +53,7 @@ CHAINE_DE_FIN;
 ?>
 
 <?php
-function getPageTitle($nom){
+function getPageTitle($nom,$logInOut){
     //Chargement du fichier
         if($logInOut==1){
             $xml = simplexml_load_file("pages/pages_connected_user.xml");
@@ -118,6 +118,14 @@ function generateMenu($askedPage,$logInOut){
     if($logInOut>0){
         printLogOutForm();
     }
+//    echo "<li>";
+//    echo $askedPage;
+//    echo "</li>";
+//
+//    echo "<li>";
+//    echo "tocard";
+//    echo "</li>";
+
 
     
     echo "</ul>";
