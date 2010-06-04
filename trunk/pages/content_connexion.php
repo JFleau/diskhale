@@ -1,11 +1,11 @@
 <?php
 //require('utils.php');
-$askedPage='connexion';
+//$askedPage='connexion';
 
 
 
     if(isset($_POST["trigramme"]) && $_POST["trigramme"] != "" &&
-    isset($_POST["mdp1"])){
+    isset($_POST["mdp1"]) && $_POST["mdp1"]!=""){
         
        logIn();
 
