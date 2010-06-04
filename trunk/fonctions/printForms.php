@@ -98,7 +98,7 @@ generateHTMLHeader('Admministrateur','gabarit.css');
                     <p>Liens externes</p>
                 </div>
                 <div id="principal">
-                    <form action="index.php" method="post">
+                    <form action="index.php?action=logadmin" method="post">
                     <table align="center" border="0">
                         <tr>
                         <td>Trigramme

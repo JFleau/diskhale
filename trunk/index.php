@@ -33,6 +33,9 @@ echo '<link rel="stylesheet" type="text/css" href="gabarit.css" />';
     if($_GET["action"] == "logout") {
   	    logOut();
     }
+    if($_GET["action"] == "logadmin") {
+  	    logAdmin();
+    }
 
 
     
@@ -60,6 +63,7 @@ echo '<link rel="stylesheet" type="text/css" href="gabarit.css" />';
 
 
     generateHTMLHeader($pageTitle,"gabarit.css");
+    //echo $askedPage;
 ?>
 
 
@@ -117,6 +121,18 @@ echo '<link rel="stylesheet" type="text/css" href="gabarit.css" />';
 
         elseif($_SESSION["loggedIn"]==2){
 
+            if($askedPage=='welcome'){
+                require('pages/content_accueil.php');
+            }
+            elseif($askedPage =='contact'){
+                require('pages/content_contact.php');
+            }
+            elseif($askedPage =='recherche'){
+                require('pages/content_recherche.php');
+            }
+            else{
+                require('pages/erreur.php');
+            }
         }
 
         else{
@@ -176,6 +192,6 @@ echo '<link rel="stylesheet" type="text/css" href="gabarit.css" />';
 <?php
 //if($_SESSION["loggedIn"]) {
 //    }
-echo $_SESSION["loggedIn"];
+//echo $_SESSION["loggedIn"];
    
     ?>
