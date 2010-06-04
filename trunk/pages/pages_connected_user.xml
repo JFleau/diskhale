@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+        <pages>
+	  <page>
+	    <name>welcome</name>
+	    <menutitle>Diskh&#226;le Classique</menutitle>
+	    <title>Accueil</title>
+	  </page>
+          <page>
+              <name>contact</name>
+              <menutitle>Contact</menutitle>
+              <title>Contact</title>
+          </page>
+          <page>
+              <name>modification</name>
+              <menutitle>Modification</menutitle>
+              <title>Modification</title>
+          </page>
+          <page>
+              <name>suppression</name>
+              <menutitle>Suppression</menutitle>
+              <title>Suppression</title>
+          </page>
+	</pages>
+
