@@ -77,6 +77,15 @@ echo '<link rel="stylesheet" type="text/css" href="gabarit.css" />';
 
     <?php
 
+            
+
+        if($_SESSION["loggedIn"]==1){
+            if($askedPage =='modification'){
+                require('pages/content_modification.php');
+            }
+            elseif($askedPage =='suppression'){
+                require('pages/content_delete_user.php');
+            }
             if($askedPage=='welcome'){
                 require('pages/content_accueil.php');
             }
@@ -96,18 +105,33 @@ echo '<link rel="stylesheet" type="text/css" href="gabarit.css" />';
                 require('pages/content_admin.php');
             }
             else require('pages/erreur.php');
+            }
 
-        if($_SESSION["loggedIn"]==1){
-            if($askedPage =='modification'){
-                require('pages/content_modification.php');
-            }
-            elseif($askedPage =='suppression'){
-                require('pages/content_delete_user.php');
-            }
-            else require('pages/erreur.php');
-        }
+
         elseif($_SESSION["loggedIn"]==2){
 
+        }
+
+        else{
+            if($askedPage=='welcome'){
+                require('pages/content_accueil.php');
+            }
+            elseif($askedPage=='inscription'){
+                require('pages/content_inscription.php');
+            }
+            elseif($askedPage =='contact'){
+                require('pages/content_contact.php');
+            }
+            elseif($askedPage =='connexion'){
+                require('pages/content_connexion.php');
+            }
+            elseif($askedPage =='recherche'){
+                require('pages/content_recherche.php');
+            }
+            elseif($askedPage =='administrateur'){
+                require('pages/content_admin.php');
+            }
+            else require('pages/erreur.php');
         }
 
         
