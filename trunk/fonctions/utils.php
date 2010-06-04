@@ -118,6 +118,7 @@ function generateMenu($askedPage,$logInOut){
     if($logInOut>0){
         printLogOutForm();
     }
+
     
     echo "</ul>";
     echo "</div>";

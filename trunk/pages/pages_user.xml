@@ -27,4 +27,9 @@
               <menutitle>Chercher un Disque</menutitle>
               <title>Recherche</title>
           </page>
+          <page>
+              <name>administrateur</name>
+              <menutitle>Administrateur</menutitle>
+              <title>Administrateur</title>
+          </page>
 	</pages>

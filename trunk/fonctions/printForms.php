@@ -84,6 +84,61 @@ generateHTMLHeader('D&eacute;connexion','gabarit.css');
 ?>
 
 <?php
+function printAdminForm(){
+generateHTMLHeader('Admministrateur','gabarit.css');
+?>
+
+    <body>
+
+        <div id="entete">Bienvenue sur le site de la Diskh&acirc;le Classique</div>
+	<div id="centre">
+            <div id="centre-bis">
+
+                <div id="secondaire">
+                    <p>Liens externes</p>
+                </div>
+                <div id="principal">
+                    <form action="" method="post">
+                    <table align="center" border="0">
+                        <tr>
+                        <td>Trigramme
+                        <td><input type=text name="trigramme" size=10 maxlength=10 value="<?php if(isset($_POST["trigramme"])) echo $_POST["trigramme"];?>"><br>
+                        </tr>
+                        <tr>
+                        <td>Mot de passe
+                        <td><input type=password name="mdp1" size=10 maxlength=10 value=""><br>
+                        </tr>
+                        <tr>
+                        <td><input type="submit" value="Valider" ><br>
+                        </tr>
+                    </table>
+                    </form>
+                </div>
+                <div id="navigation">
+                    Menu
+                    <?php
+                    $logInOut=$_SESSION["loggedIn"];
+                    generateMenu($askedPage,$logInOut);
+                    ?>
+                </div>
+
+
+            </div>
+
+            <div id="pied">Contact : envoyer un mail à dhc@binets.polytechnique.fr ou appeler le 2630</div>
+
+        </div>
+
+
+
+
+    </body>
+</html>
+<?php
+}
+?>
+
+<?php
 
 function printRegisterForm($askedPage){
     generateHTMLHeader('Inscription','gabarit.css');
