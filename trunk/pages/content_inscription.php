@@ -17,12 +17,13 @@ $form_values_valid=FALSE;
             isset($_POST["email"]) && $_POST["email"] != "" &&
             isset($_POST["kzert"]) && $_POST["kzert"] != "" &&
             isset($_POST["numero"]) && $_POST["numero"] != "") {
+
+
             connect();
             $trigramme=$_POST["trigramme"];
             $nom=$_POST["nom"];
             $prenom=$_POST["prenom"];
             $mdp1=$_POST["mdp1"];
-            $mdp2=$_POST["mdp2"];
             $email=$_POST["email"];
             $kzert=$_POST["kzert"];
             $numero=$_POST["numero"];
@@ -33,14 +34,16 @@ $form_values_valid=FALSE;
             $cotisation="non";
             $caution="non";
 
-            echo isUser($trigramme,$mdp1);
+            //echo isUser($trigramme,$mdp1);
+            
 
-            if(!isUser($trigramme,$mdp1)){
-                $query ="INSERT INTO `clients` (`trigramme`, `nom`, `prenom`,`password`,`categorie`,
+            if(!isUser($trigramme)){
+                $quer ="INSERT INTO `clients` (`trigramme`, `nom`, `prenom`,`password`,`categorie`,
                 `nbmax`,`remarques`,`email`, `kazert`,`telephone`, `statut`, `cotisation`,`caution`)
                 VALUES('$trigramme', '$nom', '$prenom','$mdp1','$categorie',
                 '5','$remarques','$email', '$kzert','$numero', '$statut', '$cotisation','$caution')";
-                if (!mysql_query($query)) echo 'Erreur SQL '.mysql_error().': '.$query;
+                if (!mysql_query($quer)) echo 'Erreur SQL '.mysql_error().': '.$quer;
+                else $_SESSION["loggedIn"];
             }
             else{
                 echo "utilisateur déjà inscrit";

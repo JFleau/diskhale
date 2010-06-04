@@ -22,4 +22,9 @@
               <menutitle>Connexion</menutitle>
               <title>Connexion</title>
           </page>
+          <page>
+              <name>recherche</name>
+              <menutitle>Chercher un Disque</menutitle>
+              <title>Recherche</title>
+          </page>
 	</pages>
