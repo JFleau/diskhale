@@ -149,6 +149,9 @@ echo '<link rel="stylesheet" type="text/css" href="gabarit.css" />';
             elseif($askedPage =='chercher_client'){
                 require('pages/pages_admin/content_search_client.php');
             }
+            elseif($askedPage =='traiter'){
+                require('pages/pages_admin/content_traiter.php');
+            }
             else{
                 require('pages/pages_user/erreur.php');
             }
