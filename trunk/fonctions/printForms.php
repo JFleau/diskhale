@@ -34,6 +34,10 @@ generateHTMLHeader('Connexion','gabarit.css');
                         <tr>
                         <td><input type="submit" value="Valider" ><br>
                         </tr>
+                        <tr>
+                        <td><input type="hidden" name="askedPage" value="<?php echo $_SESSION['currentPage'];?>" ><br>
+                        </tr>
+
                     </table>
                     </form>
                 </div>
@@ -75,6 +79,7 @@ generateHTMLHeader('D&eacute;connexion','gabarit.css');
 	<form action="index.php?action=logout<?php if($askedPage!=""){echo "?page=$askedPage";}?> " method="post">
 
 	<p><input type="submit" value="D&eacute;connecter" /></p>
+        <p><input type="hidden" name="askedPage" value="<?php echo $_SESSION['currentPage'];?>" ></p>
 	</form>
     </body>
 
@@ -110,6 +115,9 @@ generateHTMLHeader('Admministrateur','gabarit.css');
                         </tr>
                         <tr>
                         <td><input type="submit" value="Valider" ><br>
+                        </tr>
+                        <tr>
+                        <td><input type="hidden" name="askedPage" value="<?php echo $_SESSION['currentPage'];?>" ><br>
                         </tr>
                     </table>
                     </form>
@@ -201,6 +209,9 @@ function printRegisterForm($askedPage){
                         </tr>
                         <tr>
                         <td><input type="submit" value="Valider" ><br>
+                        </tr>
+                        <tr>
+                        <td><input type="hidden" name="askedPage" value="<?php echo $_SESSION['currentPage'];?>" ><br>
                         </tr>
                     </table>
 
@@ -304,6 +315,9 @@ function changepassword($askedPage){
                         <tr>
                         <td><input type="submit" value="Valider" ><br>
                         </tr>
+                        <tr>
+                        <td><input type="hidden" name="askedPage" value="<?php echo $_SESSION['currentPage'];?>" ><br>
+                        </tr>
                     </table>
                     </form>
                 </div>
@@ -361,6 +375,9 @@ function printDeleteForm($askedPage){
                         <tr>
                         <td><input type="submit" value="Valider" ><br>
                         </tr>
+                        <tr>
+                        <td><input type="hidden" name="askedPage" value="<?php echo $_SESSION['currentPage'];?>" ><br>
+                        </tr>
                     </table>
                     </form>
                 </div>
@@ -391,7 +408,7 @@ function printDeleteForm($askedPage){
 ?>
 
 <?php
-function printSearchForm(){
+function printSearchForm($askedPage){
 
 ?>
 <div id="entete">Bienvenue sur le site de la Diskh&acirc;le Classique</div>
@@ -411,7 +428,7 @@ function printSearchForm(){
                         </tr>
                         <tr>
                         <td>Code Lettres
-                        <td><input type=text name="codelettres" size=3 maxlength=3 value="<?php if(isset($_POST["categorie"])) echo $_POST["categorie"];?>"><br>
+                        <td><input type=text name="codelettres" size=3 maxlength=3 value="<?php if(isset($_POST["codelettres"])) echo $_POST["codelettres"];?>"><br>
                         </tr>
                         <tr>
                         <td>Num&eacute;ro
@@ -426,7 +443,7 @@ function printSearchForm(){
                         <td><input type=text name="oeuvres" size=10 maxlength=10 value="<?php if(isset($_POST["oeuvre"])) echo $_POST["oeuvre"];?>"><br>
                         </tr>
                         <tr>
-                            <td>Interpr&egrave;te
+                        <td>Interpr&egrave;te
                         <td><input type=text name="interpretes" size=10 maxlength=10 value="<?php if(isset($_POST["interprete"])) echo $_POST["interprete"];?>"><br>
                         </tr>
                         <tr>
@@ -438,6 +455,7 @@ function printSearchForm(){
                 <div id="navigation">
                     Menu
                     <?php
+                    $_SESSION['currentPage']='recherche';
                     $logInOut=$_SESSION["loggedIn"];
                     generateMenu($askedPage,$logInOut);
                     ?>
@@ -447,6 +465,92 @@ function printSearchForm(){
             </div>
 
             <div id="pied">Contact : envoyer un mail à dhc@binets.polytechnique.fr ou appeler le 2630</div>
+
+        </div>
+
+
+
+
+
+<?php
+}
+?>
+
+<?php
+function printSearchClientForm($askedPage){
+connect();
+$string = "SELECT * FROM `categories`";
+$query=mysql_query($string);
+?>
+<div id="entete">Bienvenue sur le site de la Diskh&acirc;le Classique</div>
+	<div id="centre">
+            <div id="centre-bis">
+
+                <div id="secondaire">
+                    <p>Liens externes</p>
+                </div>
+                <div id="principal">
+                    <form action="" method="post">
+                    <table align="center" border="0">
+                        <tr>
+                        <td>Cat&eacute;gorie
+                        <td><select name="categorie">
+                        <option value="">-
+                        <?php
+                        while ($tab = mysql_fetch_assoc($query)) {
+                            foreach ($tab as $cle=>$val) {
+                            echo "<option value=\"".$val."\">".$val;
+                            }
+                        }
+                        ?>
+
+                        </select><br>
+                        </tr>
+                        <tr>
+                        <td>Trigramme
+                        <td><input type=text name="trigramme" size=10 maxlength=10 value="<?php if(isset($_POST["trigramme"])) echo $_POST["trigramme"];?>"><br>
+                        </tr>
+                        <tr>
+                        <td>Pr&eacute;nom
+                        <td><input type=text name="prenom" size=10 maxlength=10 value="<?php if(isset($_POST["prenom"])) echo $_POST["prenom"];?>"><br>
+                        </tr>
+                        <tr>
+                        <td>Nom
+                        <td><input type=text name="nom" size=10 maxlength=10 value="<?php if(isset($_POST["nom"])) echo $_POST["nom"];?>"><br>
+                        </tr>
+                        <tr>
+                        <td>Newsletter
+                        <td><input type=text name="newsletter" size=10 maxlength=10 value="<?php if(isset($_POST["newsletter"])) echo $_POST["newsletter"];?>"><br>
+                        </tr>
+                        <tr>
+                        <td>Caution
+                        <td><input type=text name="caution" size=10 maxlength=10 value="<?php if(isset($_POST["caution"])) echo $_POST["caution"];?>"><br>
+                        </tr>
+                        <tr>
+                        <td>Cotisation
+                        <td><input type=text name="cotisation" size=10 maxlength=10 value="<?php if(isset($_POST["cotisation"])) echo $_POST["cotisation"];?>"><br>
+                        </tr>
+                        <tr>
+                        <td><input type="submit" value="Valider" ><br>
+                        </tr>
+                    </table>
+                    </form>
+                </div>
+                <div id="navigation">
+                    Menu
+                    <?php
+                    $_SESSION['currentPage']='chercher_client';
+                    $logInOut=$_SESSION["loggedIn"];
+                    generateMenu($askedPage,$logInOut);
+                    ?>
+                </div>
+
+
+            </div>
+
+            <div id="pied">Contact : envoyer un mail à dhc@binets.polytechnique.fr ou appeler le 2630</div>
+
+            
 
         </div>
 

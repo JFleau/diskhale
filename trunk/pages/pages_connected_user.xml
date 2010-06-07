@@ -21,5 +21,10 @@
               <menutitle>Suppression</menutitle>
               <title>Suppression</title>
           </page>
+          <page>
+              <name>recherche</name>
+              <menutitle>Chercher un Disque</menutitle>
+              <title>Recherche</title>
+          </page>
 	</pages>
 

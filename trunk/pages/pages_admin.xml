@@ -26,5 +26,10 @@
               <menutitle>Liste des retardataires</menutitle>
               <title>Liste des retardataires</title>
           </page>
+          <page>
+              <name>recherche</name>
+              <menutitle>Chercher un Disque</menutitle>
+              <title>Recherche</title>
+          </page>
 	</pages>
 

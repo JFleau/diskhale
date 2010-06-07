@@ -23,6 +23,7 @@
                 <div id="navigation">
                     Menu
                     <?php
+                    $_SESSION['currentPage']='welcome';
                     $logInOut=$_SESSION["loggedIn"];
                     generateMenu($askedPage,$logInOut);
                     ?>

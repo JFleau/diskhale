@@ -8,7 +8,7 @@ $h=' disques';
 $k=0;
 $l=0;
 
-printSearchForm();
+printSearchForm($askedPage);
 
 for($i=1;$i<=6;$i++){
     if(isset($_POST[$search[$i]]) && $_POST[$search[$i]]!=""){
@@ -52,7 +52,25 @@ for($i=1;$i<=6;$i++){
             if($tab2!=""){
                 foreach ($tab2 as $cle2=>$val2) {
                     if($cle2=="trigramme"){
-                        echo "emprunte par".' => '.$val2.'<br />'.'<br />';
+
+                        if($_SESSION["loggedIn"]==2){
+                        echo "emprunte par".' => <a href="index.php?page=traiter_client"/>'.
+                        $val2.'</a><br />'.'<br />';
+
+                       
+                        ?>
+
+
+                        <form action="index.php?" method="post">
+                            <p><input type="hidden" name="trigramme" value="<?php echo $cle2;?>" ></p>
+                        </form>
+
+                        <?php
+                        }
+                        else{
+                            echo "emprunte par".' => '.
+                        $val2.'<br />'.'<br />';
+                        }
                     }
                 }
             }
@@ -75,3 +93,8 @@ for($i=1;$i<=6;$i++){
 
 
 ?>
+
+<!--<a href="index.php?page=";
+   "\">";
+   "</a>
+-->

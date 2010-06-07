@@ -14,6 +14,7 @@
                 <div id="navigation">
                     Menu
                     <?php
+                    $_SESSION['currentPage']='contact';
                     $logInOut=$_SESSION["loggedIn"];
                     generateMenu($askedPage,$logInOut);
                     ?>
@@ -25,3 +26,4 @@
             <div id="pied">Contact : envoyer un mail à dhc@binets.polytechnique.fr ou appeler le 2630</div>
 
         </div>
+

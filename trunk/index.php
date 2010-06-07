@@ -38,11 +38,19 @@ echo '<link rel="stylesheet" type="text/css" href="gabarit.css" />';
     }
 
 
-    
-
-        switch (isset($_GET['page'])) {
-        case 'true': $askedPage=$_GET['page']; break;
-        default: $askedPage=welcome;
+        if(isset($_POST['askedPage'])){
+            $askedPage=$_POST['askedPage'];
+            $logInOut=$_SESSION["loggedIn"];
+            $authorized=checkPage($askedPage,$logInOut);
+            if(!$authorized){
+                $askedPage="welcome";
+            }
+        }
+        else{
+            switch (isset($_GET['page'])) {
+            case 'true': $askedPage=$_GET['page']; break;
+            default: $askedPage=welcome;
+            }
         }
 
         $logInOut=$_SESSION["loggedIn"];
@@ -54,6 +62,8 @@ echo '<link rel="stylesheet" type="text/css" href="gabarit.css" />';
         else{
             $pageTitle="Erreur";
         }
+
+        
 //        echo $pageTitle;
 //        echo $logInOut;
 //        echo $authorized;
@@ -84,37 +94,43 @@ echo '<link rel="stylesheet" type="text/css" href="gabarit.css" />';
 
 <div id="global">
 
+
+
     <?php
+
+        
+        
+
 
             
 
         if($_SESSION["loggedIn"]==1){
             if($askedPage =='modification'){
-                require('pages/content_modification.php');
+                require('pages/pages_connected_user/content_modification.php');
             }
             elseif($askedPage =='suppression'){
-                require('pages/content_delete_user.php');
+                require('pages/pages_connected_user/content_delete_user.php');
             }
             elseif($askedPage=='welcome'){
-                require('pages/content_accueil.php');
+                require('pages/pages_user/content_accueil.php');
             }
             elseif($askedPage=='inscription'){
-                require('pages/content_inscription.php');
+                require('pages/pages_user/content_inscription.php');
             }
             elseif($askedPage =='contact'){
-                require('pages/content_contact.php');
+                require('pages/pages_user/content_contact.php');
             }
             elseif($askedPage =='connexion'){
-                require('pages/content_connexion.php');
+                require('pages/pages_user/content_connexion.php');
             }
             elseif($askedPage =='recherche'){
-                require('pages/content_recherche.php');
+                require('pages/pages_user/content_recherche.php');
             }
             elseif($askedPage =='administrateur'){
-                require('pages/content_admin.php');
+                require('pages/pages_admin/content_admin.php');
             }
             else{
-                require('pages/erreur.php');
+                require('pages/pages_user/erreur.php');
             }
         }
 
@@ -122,45 +138,49 @@ echo '<link rel="stylesheet" type="text/css" href="gabarit.css" />';
         elseif($_SESSION["loggedIn"]==2){
 
             if($askedPage=='welcome'){
-                require('pages/content_accueil.php');
+                require('pages/pages_user/content_accueil.php');
             }
             elseif($askedPage =='contact'){
-                require('pages/content_contact.php');
+                require('pages/pages_user/content_contact.php');
             }
             elseif($askedPage =='recherche'){
-                require('pages/content_recherche.php');
+                require('pages/pages_user/content_recherche.php');
+            }
+            elseif($askedPage =='chercher_client'){
+                require('pages/pages_admin/content_search_client.php');
             }
             else{
-                require('pages/erreur.php');
+                require('pages/pages_user/erreur.php');
             }
         }
 
         else{
             if($askedPage=='welcome'){
-                require('pages/content_accueil.php');
+                require('pages/pages_user/content_accueil.php');
             }
             elseif($askedPage=='inscription'){
-                require('pages/content_inscription.php');
+                require('pages/pages_user/content_inscription.php');
             }
             elseif($askedPage =='contact'){
-                require('pages/content_contact.php');
+                //$currentPage='contact';
+                require('pages/pages_user/content_contact.php');
             }
             elseif($askedPage =='connexion'){
-                require('pages/content_connexion.php');
+                require('pages/pages_user/content_connexion.php');
             }
             elseif($askedPage =='recherche'){
-                require('pages/content_recherche.php');
+                require('pages/pages_user/content_recherche.php');
             }
             elseif($askedPage =='administrateur'){
-                require('pages/content_admin.php');
+                require('pages/pages_admin/content_admin.php');
             }
             else{
-                require('pages/erreur.php');
+                require('pages/pages_user/erreur.php');
             }
         }
 
         
-            
+        //echo $currentPage;
         
        
        
