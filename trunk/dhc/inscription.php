@@ -67,7 +67,8 @@
     <tr>
     <td colspan="4">Recevoir la newsletter de cette catégorie :
     <input checked="true" name="news" value="oui" type="radio" style="width:20px; border:none" />oui 
-    <input name="news" value="non" type="radio"  style="width:20px; border:none" />non</td>
+    <input name="news" value="non" type="radio"  style="width:20px; border:none" />non
+    <input type="hidden" name="action_inscription" value="inscription" /></td>
     </tr>
             
     <tr><td height="20" colspan="3"></td><td></td></tr>
@@ -93,3 +94,7 @@
     <input type="text" name="mois" id="mois" disabled="disabled" value="" style="padding-left:5px; background-color:#FFFFFF; border:none; width:285px; color:#4682b4" />
     </form>
     </div>
+
+<?php
+    inscription();
+?>
