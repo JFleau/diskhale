@@ -32,7 +32,6 @@ padding:0px;
 margin:0px;
 font-family: Tahoma, Helvetica, Arial,  Sans-Serif;
 font-size: 13px;
-color: #ffffff;
 text-align:justify;
 line-height:20px;
 
@@ -54,6 +53,12 @@ font-size:36px;
 {
 background-image:url(images/fond3_accueil_leger.png);
 height:480px;
+}
+
+#header p
+{
+padding-left:00px;
+padding-top:26px;
 }
 
 #header form
@@ -120,6 +125,7 @@ font-weight:bold;
 line-height:25px;
 margin-left:auto;
 margin-right:auto;
+color:#FFFFFF;
 }
 
 .formulaire td
@@ -137,6 +143,15 @@ width:150px;
 #contact
 {
 height:419px;
+}
+
+#contact table
+{
+font-size:13px;
+line-height:25px;
+margin-left:auto;
+margin-right:auto;
+color:#FFFFFF;
 }
 
 #password
@@ -176,3 +191,36 @@ line-height:18px;
   margin-bottom:0px;
 }
 
+#headresultats
+{
+background-color:#990000;
+color:#FFFFFF;
+padding:10px;
+margin:0px;
+}
+
+#bodyresultats
+{
+background-color:#ececec;
+padding:10px;
+margin:0px;
+font-family: Tahoma, Helvetica, Arial,  Sans-Serif;
+font-size: 13px;
+color: #242C2D;
+line-height:20px;
+}
+
+#bodyresultats p
+{
+padding-top:5px;
+margin:0px;
+}
+
+#headresultats h3, #bodyresultats h3
+{
+  font-family: Geneva, Arial, Verdana, Helvetica, Sans-Serif;
+  font-size: 15px;
+  padding-left:00px;
+  padding-top:0px;
+  margin:0px;
+}

@@ -90,6 +90,6 @@
         <option value="2009">X2009</option>
     </select>
     <input type="button" value="calculer" onclick="mois.value=nomdumois()+'&nbsp; > &nbsp;'+calculcotisation();" />
-    <input type="text" name="mois" id="mois" disabled="disabled" value="" style="padding-left:5px; background-color:#FFFFFF; border:none; width:290px; color:#4682b4" />
+    <input type="text" name="mois" id="mois" disabled="disabled" value="" style="padding-left:5px; background-color:#FFFFFF; border:none; width:285px; color:#4682b4" />
     </form>
     </div>
