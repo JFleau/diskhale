@@ -15,8 +15,8 @@ return $authorized;
 }
 
 function connect(){
-mysql_connect("localhost", "root", "2uh5ZpjB7CsceR3w") or die("Erreur de connexion à MySQL");
-mysql_select_db("dhc") or die("Erreur de connexion à la base de données");
+mysql_connect("localhost", "root", "root") or die("Erreur de connexion ï¿½ MySQL");
+mysql_select_db("dhc") or die("Erreur de connexion ï¿½ la base de donnï¿½es");
 mysql_query("SET NAMES UTF8");
 }
 
@@ -113,5 +113,81 @@ function recherche($begin) {
 	$result=mysql_query($query);
 	return $result;
 	}
+}
+
+
+function inscription(){
+
+
+
+	if(isset($_POST["trigramme"]) && $_POST["trigramme"] != "" &&
+            isset($_POST["nom"]) && $_POST["nom"] != "" &&
+            isset($_POST["prenom"]) && $_POST["prenom"] != "" &&
+            isset($_POST["password"]) && $_POST["password"] != "" &&
+            isset($_POST["password2"]) && $_POST["password2"] != "" &&
+            $_POST["password2"] == $_POST["password"] &&
+            isset($_POST["mail"]) && $_POST["mail"] != "" &&
+            isset($_POST["kzert"]) && $_POST["kzert"] != "" &&
+            isset($_POST["tel"]) && $_POST["tel"] != "") {
+
+
+            
+            $trigramme=$_POST["trigramme"];
+            $nom=$_POST["nom"];
+            $prenom=$_POST["prenom"];
+            $mdp1=$_POST["password"];
+            $email=$_POST["mail"];
+            $kzert=$_POST["kzert"];
+            $numero=$_POST["tel"];
+            $categorie=$_POST["categorie"];
+            $news=$_POST["news"];
+            $remarques=" ";
+            $statut=" ";
+            $cotisation="non";
+            $caution="non";
+
+            $trlen=strlen($trigramme);
+            if($trlen!=3 || !is_int($kzert) || !is_int($numero)){
+                if($trlen!=3){
+                    echo "un trigramme contient 3 lettres!!!";
+                }
+                if(!is_int($kzert)){
+                    echo "le champ kzert doit contenir un entier";
+                }
+                if(!is_int($numero)){
+                    echo "le champ numero doit contenir un entier";
+                }
+            }
+            
+            else{
+                connect();
+                $tr=mysql_query("SELECT * FROM `clients` WHERE `trigramme`='$trigramme'");
+                $res=mysql_numrows($tr);
+                if($res==0){
+                    $quer ="INSERT INTO `clients` (`trigramme`, `nom`, `prenom`,`password`,`categorie`,
+                    `nbmax`,`remarques`,`email`, `kazert`,`telephone`, `statut`, `cotisation`,`caution`)
+                    VALUES('$trigramme', '$nom', '$prenom','$mdp1','$categorie',
+                    '5','$remarques','$email', '$kzert','$numero', '$statut', '$cotisation','$caution')";
+                    if (!mysql_query($quer)) echo 'Erreur SQL '.mysql_error().': '.$quer;
+                    else $_SESSION["loggedIn"]=1;
+
+                }
+
+                else{
+                    echo "utilisateur dÃ©jÃ  inscrit";
+                }
+
+                mysql_close();
+            }
+        }
+
+        elseif($_POST['action_inscription']=="inscription"){
+            echo "le formulaire est mal rempli";
+        }
+
+
+
+
+
 }
 	?>	
