@@ -4,7 +4,7 @@
     <table border="0" style="text-align:right; vertical-align:middle" cellpadding="0">
     <tr>
     <td width="250" colspan="3">Trigramme souhaité</td>
-    <td width=""><input type="text" name="trigramme" value="exemple: DHC" onFocus="this.value=verify(this,'exemple: DHC');" onblur="this.value=verify(this,'exemple: DHC');" /></td>
+    <td width=""><input type="text" name="trigramme" value="<?php if(isset($_POST["trigramme"])){ echo $_POST["trigramme"];} else {echo"exemple: DHC";}?>" onFocus="this.value=verify(this,'exemple: DHC');" onblur="this.value=verify(this,'exemple: DHC');" /></td>
     </tr>
     <tr>
     <td colspan="3">Mot de passe</td>
@@ -19,15 +19,15 @@
     
     <tr>
     <td>Nom</td>
-    <td><input type="text" name="nom" /></td>
+    <td><input type="text" name="nom" value="<?php if(isset($_POST["nom"])){ echo $_POST["nom"];} ?>" /></td>
     <td>Prénom</td>
-    <td><input type="text" name="prenom" /></td>
+    <td><input type="text" name="prenom" value="<?php if(isset($_POST["prenom"])){ echo $_POST["prenom"];} ?>" /></td>
     </tr>
     <tr>
     <td>Casert</td>
-    <td><input type="text" name="kzert" value="exemple: 691009" onFocus="this.value=verify(this,'exemple: 691009');" onblur="this.value=verify(this,'exemple: 691009');" /></td>
+    <td><input type="text" name="kzert" value="<?php if(isset($_POST["kzert"])){ echo $_POST["kzert"];} else {echo"exemple: 691009";}?>" onFocus="this.value=verify(this,'exemple: 691009');" onblur="this.value=verify(this,'exemple: 691009');" /></td>
     <td>Téléphone</td>
-    <td><input type="text" name="tel" value="exemple: 6419" onFocus="this.value=verify(this,'exemple: 6419');" onblur="this.value=verify(this,'exemple: 6419');" /></td>
+    <td><input type="text" name="tel" value="<?php if(isset($_POST["tel"])){ echo $_POST["tel"];} else {echo"exemple: 6419";}?>" onFocus="this.value=verify(this,'exemple: 6419');" onblur="this.value=verify(this,'exemple: 6419');" /></td>
     </tr>
     
     <tr><td height="20" colspan="3"></td><td></td></tr>
@@ -35,7 +35,7 @@
     <tr>
     <td>e-mail</td>
     <td colspan="3" style="font-weight:normal; text-align:left">
-    <input type="text" name="mail" style="width:240px;" value="exemple: pierre.dupont" onFocus="this.value=verify(this,'exemple: pierre.dupont');" onblur="this.value=verify(this,'exemple: pierre.dupont');" />
+    <input type="text" name="mail" style="width:240px;" value="<?php if(isset($_POST["mail"])){ echo $_POST["mail"];} else {echo "exemple: pierre.dupont";}?>" onFocus="this.value=verify(this,'exemple: pierre.dupont');" onblur="this.value=verify(this,'exemple: pierre.dupont');" />
     <select name="ecole" style="margin-right:3px; width:150px;">
     	<option value="polytechnique.edu">@polytechnique.edu</option>
         <option value="institutoptique.fr">@institutoptique.fr</option>

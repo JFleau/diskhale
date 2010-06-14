@@ -4,15 +4,15 @@
     <table border="0" style="text-align:right; vertical-align:middle" cellpadding="0" align="center">
     <tr>
     <td width="" colspan="3">Artiste/Compositeur</td>
-    <td width=""><input type="text" name="artiste" /></td>
+    <td width=""><input type="text" name="artiste" value="<?php if(isset($_POST["artiste"])) echo $_POST["artiste"];?>" /></td>
     </tr>
     <tr>
     <td colspan="3">Oeuvre</td>
-    <td><input type="text" name="oeuvre" /></td>
+    <td><input type="text" name="oeuvre" value="<?php if(isset($_POST["oeuvre"])) echo $_POST["oeuvre"];?>" /></td>
     </tr>
     <tr>
     <td colspan="3">Interprète</td>
-    <td><input type="text" name="interprete" /></td>
+    <td><input type="text" name="interprete" value="<?php if(isset($_POST["interprete"])) echo $_POST["interprete"];?>" /></td>
     </tr>
     
     <tr><td height="20" colspan="3"></td><td></td></tr>
@@ -40,9 +40,9 @@
 
     <tr>
     <td colspan="2">Code lettres</td>
-    <td><div align="left"><input type="text" name="code" style="width:55px;" /></div></td>
+    <td><div align="left"><input type="text" name="code" style="width:55px;" value="<?php if(isset($_POST["code"])) echo $_POST["code"];?>" /></div></td>
     <td>Numéro
-    <input type="text" name="numero" style="width:55px;" /></td>
+    <input type="text" name="numero" style="width:55px;" value="<?php if(isset($_POST["numero"])) echo $_POST["numero"];?>" /></td>
     </tr>
             
     <tr><td height="20" colspan="3"></td><td></td></tr>
