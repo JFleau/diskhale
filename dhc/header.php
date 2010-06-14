@@ -16,7 +16,7 @@
     
     </form>';
 		}
-		else echo '<form action="" method="post"><input type="hidden" name="action" value="logout"><input type="submit" value="Déconnexion" style="float:left"></form><p style="float:left">&nbsp;&nbsp;'.$_SESSION['bienvenue'].'</p>';
+		else echo '<form action="" method="post"><input type="hidden" name="action" value="logout"><input type="submit" value="Déconnexion" style="float:left"></form><p style="float:left; color:#ffffff">&nbsp;&nbsp;'.$_SESSION['bienvenue'].'</p>';
 	?>
         
     <?php
