@@ -37,11 +37,20 @@ function logIn() {
 		$_SESSION['bienvenue']="echec";
 	}
 	else {
-		if ($trigramme=="dhc") $_SESSION['loggedIn']=2; else $_SESSION['loggedIn']=1;
-		$array=mysql_fetch_assoc($result);
-		$_SESSION['bienvenue']="Bienvenue, <b>".$array['prenom']."</b> !";
+		if ($trigramme=="dhc"){
+                    $_SESSION['loggedIn']=2;
+                    $_SESSION['bienvenue']="Session administrateur";
+                }
+                else{
+                    $_SESSION['loggedIn']=1;
+                    $array=mysql_fetch_assoc($result);
+                    $_SESSION['bienvenue']="Bienvenue, <b>".$array['prenom']."</b> !";
+                }
+		
 	}
 }
+
+//il faut creer l'administrateur dhc melodix dans la base de données.
 
 function logOut() {
 	$_SESSION['loggedIn']=0;
@@ -147,15 +156,20 @@ function inscription(){
             $caution="non";
 
             $trlen=strlen($trigramme);
+//            echo !is_numeric($kzert);
+//            echo !is_numeric($numero);
             if($trlen!=3 || !is_int($kzert) || !is_int($numero)){
                 if($trlen!=3){
                     echo "un trigramme contient 3 lettres!!!";
                 }
-                if(!is_int($kzert)){
+                if(!is_numeric($kzert) || (int)$kzert!=$kzert){
                     echo "le champ kzert doit contenir un entier";
+                    //echo $kzert;
+                    
                 }
-                if(!is_int($numero)){
+                if(!is_numeric($numero) || (int)$numero!=$numero){
                     echo "le champ numero doit contenir un entier";
+                    //echo $numero;
                 }
             }
             
