@@ -94,7 +94,34 @@
 		$categorie=$array["intitule"];
     	echo '<table border="0" style="margin:20px; margin-bottom:5px"><tr><td width="20" valign="top">'.$numero.'.</td>
 		<td><h3>'.$row["oeuvres"].'</h3>'.$row["compositeurs"].'<p style="font-size:11px;">';if ($row["interpretes"]!="") echo 'interprété par : '.$row["interpretes"];echo'</p><p style="color:#888888">'.$categorie.' &nbsp; | &nbsp; '.$row["codelettres"].' &nbsp; | &nbsp; '.$row["numero"].' </p></td></tr></table>';
-		}
+		
+                $code=$row["codelettres"];
+                $num=$row["numero"];
+                //echo $code;
+                //echo $num;
+                $strempr="SELECT `trigramme` FROM `emprunts` WHERE `codelettres`='$code' AND `numero`='$num' AND `daterendu`='0000-00-00'";
+                $querempr=mysql_query($strempr);
+                while ($tab = mysql_fetch_assoc($querempr)) {
+                      //echo $tab['trigramme'];
+                      $tri=$tab['trigramme'];
+                      $strtri="SELECT * FROM `clients` WHERE `trigramme`='$tri'";
+                      $quertri=mysql_query($strtri);
+                      while($tab2=mysql_fetch_assoc($quertri)){
+                          echo "emprut&eacute; par ".$tab2['nom']." ";    //revoir la mise en page
+                          echo $tab2['prenom'];                           //idem
+                      }
+                }
+
+                }
+
+
+
+
+
+
+
+
+
 		echo '</div><div id="headresultats" style="background-color:#444444; height:20px">';
 		if ($totalpages>1) {
 		if ($num<$totalpages) {
