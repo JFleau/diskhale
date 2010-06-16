@@ -107,8 +107,13 @@
                       $strtri="SELECT * FROM `clients` WHERE `trigramme`='$tri'";
                       $quertri=mysql_query($strtri);
                       while($tab2=mysql_fetch_assoc($quertri)){
-                          echo "emprut&eacute; par ".$tab2['nom']." ";    //revoir la mise en page
-                          echo $tab2['prenom'];                           //idem
+                          if($_SESSION['loggedIn']==2){
+                              echo "emprut&eacute; par ".'<a href=\"index.php?page=traiter\"/>'.$tab2['nom']." ".$tab2['prenom'].'</a><br />'.'<br />';  //revoir la mise en page
+                          }
+                          else{
+                              echo "emprut&eacute; par ".$tab2['nom']." ".$tab2['prenom'];    //revoir la mise en page
+                          }
+                          
                       }
                 }
 
