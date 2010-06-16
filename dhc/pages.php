@@ -5,4 +5,5 @@ if ($page=="inscription") $url="inscription.php";
 if ($page=="recherche") $url="recherche.php";
 if ($page=="madiskhale") $url="madiskhale.php";
 if ($page=="administration") $url="administration.php";
+if ($page=="retardataires") $url="retardataires.php";
 ?>
