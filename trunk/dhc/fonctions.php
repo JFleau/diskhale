@@ -15,7 +15,7 @@ return $authorized;
 }
 
 function connect(){
-mysql_connect("localhost", "root", "root") or die("Erreur de connexion � MySQL");
+mysql_connect("localhost", "root", "2uh5ZpjB7CsceR3w") or die("Erreur de connexion � MySQL");
 mysql_select_db("dhc") or die("Erreur de connexion � la base de donn�es");
 mysql_query("SET NAMES UTF8");
 }
@@ -177,13 +177,14 @@ function inscription(){
                     echo "utilisateur déjà inscrit";
                 }
 
-                mysql_close();
             }
         }
 
-        elseif($_POST['action_inscription']=="inscription"){
+        elseif(isset($_POST['action'])){
+			if ($_POST['action']=="inscription") {
             echo "le formulaire est mal rempli";
         }
+		}
 
 
 
