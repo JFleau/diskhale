@@ -68,7 +68,7 @@
     <td colspan="4">Recevoir la newsletter de cette catégorie :
     <input checked="true" name="news" value="oui" type="radio" style="width:20px; border:none" />oui 
     <input name="news" value="non" type="radio"  style="width:20px; border:none" />non
-    <input type="hidden" name="action_inscription" value="inscription" /></td>
+    <input type="hidden" name="action" value="inscription" /></td>
     </tr>
             
     <tr><td height="20" colspan="3"></td><td></td></tr>
