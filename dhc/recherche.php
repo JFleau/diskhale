@@ -96,10 +96,10 @@
 		<td><h3>'.$row["oeuvres"].'</h3>'.$row["compositeurs"].'<p style="font-size:11px;">';if ($row["interpretes"]!="") echo 'interprété par : '.$row["interpretes"];echo'</p><p style="color:#888888">'.$categorie.' &nbsp; | &nbsp; '.$row["codelettres"].' &nbsp; | &nbsp; '.$row["numero"].' </p></td></tr></table>';
 		
                 $code=$row["codelettres"];
-                $num=$row["numero"];
+                $numer=$row["numero"];
                 //echo $code;
-                //echo $num;
-                $strempr="SELECT `trigramme` FROM `emprunts` WHERE `codelettres`='$code' AND `numero`='$num' AND `daterendu`='0000-00-00'";
+                //echo $numero;
+                $strempr="SELECT `trigramme` FROM `emprunts` WHERE `codelettres`='$code' AND `numero`='$numer' AND `daterendu`='0000-00-00'";
                 $querempr=mysql_query($strempr);
                 while ($tab = mysql_fetch_assoc($querempr)) {
                       //echo $tab['trigramme'];
