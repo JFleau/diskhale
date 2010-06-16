@@ -108,7 +108,7 @@
                       $quertri=mysql_query($strtri);
                       while($tab2=mysql_fetch_assoc($quertri)){
                           if($_SESSION['loggedIn']==2){
-                              echo "emprut&eacute; par ".'<a href=\"index.php?page=traiter\"/>'.$tab2['nom']." ".$tab2['prenom'].'</a><br />'.'<br />';  //revoir la mise en page
+                              echo "emprut&eacute; par ".'<a href=\"index.php?page=traiter\"/>'.$tab2['nom']." ".$tab2['prenom'].'</a><br />'.'<br />';  //revoir la mise en page corriger le nom de la page du lien
                           }
                           else{
                               echo "emprut&eacute; par ".$tab2['nom']." ".$tab2['prenom'];    //revoir la mise en page
