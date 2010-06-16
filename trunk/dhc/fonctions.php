@@ -8,7 +8,7 @@ if ($_SESSION['loggedIn']==1) {
 	if ($page=="accueil"||$page=="madiskhale"||$page=="recherche") $authorized=true; else $authorized=false;
 	}
 if ($_SESSION['loggedIn']==2) {
-	if ($page=="accueil"||$page=="administration"||$page=="recherche") $authorized=true; else $authorized=false;
+	if ($page=="accueil"||$page=="administration"||$page=="recherche"||$page=="retardataires") $authorized=true; else $authorized=false;
 	}
 
 return $authorized;
