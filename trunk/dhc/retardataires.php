@@ -56,11 +56,26 @@ foreach($t as $cle=>$val){
     $query2=mysql_query($string2);
     $string3="SELECT * FROM `clients` WHERE `trigramme`='$cle'";
     $mec=mysql_query($string3);
+    $string4="SELECT MAX(TO_DAYS(`daterendu`)-TO_DAYS(`dateemprunt`))
+FROM `emprunts` WHERE `trigramme`='$cle' AND `daterendu`!=0000-00-00";
+    $max=mysql_query($string4);
+
+    while($maxres = mysql_fetch_assoc($max)){
+        foreach($maxres as $clemax=>$valuemax){
+            $retardmax=$valuemax;
+            echo $retardmax;
+        }
+
+    }
 
 
     while($pers = mysql_fetch_assoc($mec)){
         $nom=$pers['nom'];
         $prenom=$pers['prenom'];
+        $mail=$pers['email'];
+        $categorie=$pers['categorie'];
+
+        //echo $mail;
         //echo $nom." ".$prenom."<br/>";
     }
 
@@ -71,14 +86,17 @@ foreach($t as $cle=>$val){
     
 
     <div class="zoneTexteAfficherMasquer">
+        
         <script>
-        javt[j]='<?php echo $nom;?>';
+        var nom="<?php echo $prenom." ".$nom." ".$categorie." ".$cle; ?>";
+        javt[j]=nom;
         j++;
-        
         </script>
-        
+
+            
 	    <span class="inviteClic"></span>
 	    <div class="TexteAAfficher" style="text-align:center;font-size: large">
+            
 
 
 
@@ -99,15 +117,11 @@ foreach($t as $cle=>$val){
 ?>
 
 
-
-
-
-                
                 <p><?php echo $cat;?></p>
                 <p><?php echo $code;?></p>
                 <p><?php echo $numcode;?></p>
                 <p><?php echo $retard;?></p>
-                <p><?php echo $nom;?></p>
+                <p><?php echo $nom." ".$prenom;?></p>
                 <br/>
          
 
@@ -118,10 +132,13 @@ foreach($t as $cle=>$val){
     }
 
 ?>
+               <p><?php echo"<a href=\"mailto:".$mail."\">email</a>"; ?></p>
          </div>
 	</div>
 
 <?php
 }
 
+
 ?>
+
