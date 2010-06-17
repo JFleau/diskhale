@@ -40,8 +40,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=100" >
 <title>Diskhâle classique</title>
 <link rel="stylesheet" type="text/css" href="style2.css" />
+<script type="text/javascript" src="scripts/jquery-1.4.1.min.js"></script>
 <script type="text/javascript">
-<!--
+//<!--
 
    function verify(champ,value)
    {
@@ -69,7 +70,7 @@
    var mois=date.getMonth();
    return 'Mois actuel : '+ nom[mois];
    };
-   
+
 //-->
 </script>
 
