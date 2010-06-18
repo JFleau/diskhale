@@ -8,7 +8,8 @@ if ($_SESSION['loggedIn']==1) {
 	if ($page=="accueil"||$page=="madiskhale"||$page=="recherche") $authorized=true; else $authorized=false;
 	}
 if ($_SESSION['loggedIn']==2) {
-	if ($page=="accueil"||$page=="administration"||$page=="recherche"||$page=="retardataires") $authorized=true; else $authorized=false;
+	if ($page=="accueil"||$page=="administration"||$page=="recherche"
+            ||$page=="retardataires") $authorized=true; else $authorized=false;
 	}
 
 return $authorized;
@@ -160,15 +161,15 @@ function inscription(){
 //            echo !is_numeric($numero);
             if($trlen!=3 || !is_int($kzert) || !is_int($numero)){
                 if($trlen!=3){
-                    echo "un trigramme contient 3 lettres!!!";
+                    echo "un trigramme contient 3 lettres!!!<br/>";
                 }
                 if(!is_numeric($kzert) || (int)$kzert!=$kzert){
-                    echo "le champ kzert doit contenir un entier";
+                    echo "le champ kzert doit contenir un entier<br/>";
                     //echo $kzert;
                     
                 }
                 if(!is_numeric($numero) || (int)$numero!=$numero){
-                    echo "le champ numero doit contenir un entier";
+                    echo "le champ numero doit contenir un entier<br/>";
                     //echo $numero;
                 }
             }
