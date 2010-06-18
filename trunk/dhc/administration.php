@@ -3,7 +3,7 @@
 
 <div id="formulaire" class="formulaire" style="height:200px;">
 	<h3>Traiter Client</h3><hr size="2" style="margin-bottom:20px; margin-top:0px; padding:0px; size:1px; height:1px; border-top:none; border-width:1px; border-color:#FFFFFF"/>
-    <form action="#resultats" method="post">
+    <form action="" method="post">
     <table border="0" style="text-align:right; vertical-align:middle" cellpadding="0" align="center">
     <tr>
     <td width="" colspan="3">Trigramme</td>
@@ -39,6 +39,8 @@ if(isset($_POST["trigramme"])){
         $caution=$tab['caution'];
     }
 
+
+    //affichage de l'emprunteur
     echo '<div id="headresultats"><h3 style="padding-left:10px">'.$nombre.' Traiter Client</h3>';
     echo '</div>';
     echo '<div id="bodyresultats">';
@@ -72,7 +74,7 @@ if(isset($_POST["trigramme"])){
 
 <div id="formulaire" class="formulaire" style="height:170px;">
 	<h3>Ajouter un emprunt</h3><hr size="2" style="margin-bottom:20px; margin-top:0px; padding:0px; size:1px; height:1px; border-top:none; border-width:1px; border-color:#FFFFFF"/>
-    <form action="#resultats" method="post">
+    <form action="" method="post">
     <table border="0" style="text-align:right; vertical-align:middle" cellpadding="0" align="center">
     <tr>
     <td width="" colspan="3">Code lettre</td>
@@ -84,7 +86,9 @@ if(isset($_POST["trigramme"])){
     </tr>
     </table>
         <div align="right">
-            <input type="hidden" name="action" value="firstrecherche" /><input type="reset" value="Annuler" style="margin-top:20px; margin-bottom:20px; margin-right:10px; width:auto"/>
+            <input type="hidden" name="action" value="firstrecherche" />
+            <input type="hidden" name="trigramme" value="<?php echo $trigramme;?>" />
+            <input type="reset" value="Annuler" style="margin-top:20px; margin-bottom:20px; margin-right:10px; width:auto"/>
             <input type="submit" value="Emprunter" style="margin-top:20px; margin-bottom:20px; margin-right:10px;"/>
         </div>
     </form>
@@ -94,7 +98,16 @@ if(isset($_POST["trigramme"])){
 </div>
 
 <?php
-    $string2="SELECT * FROM `emprunts` WHERE `trigramme`='$trigramme' AND `daterendu`=0000-00-00 ";
+    //ajout d'emprunts;
+    if(isset($_POST['codelettres']) && $_POST['codelettres']!=""
+        && isset($_POST['numero']) && $_POST['numero']!=""){
+        emprunter($trigramme);
+
+    }
+
+//affichage des disques empruntés.
+
+$string2="SELECT * FROM `emprunts` WHERE `trigramme`='$trigramme' AND `daterendu`=0000-00-00 ";
     $query2=mysql_query($string2);
     while($tab2 = mysql_fetch_assoc($query2)){
         $code=$tab2['codelettres'];
@@ -115,16 +128,25 @@ if(isset($_POST["trigramme"])){
             if($tab3['remarques']!=""){ $rem=$rem."<br/>";}
         }
 
+        if(isset($_POST['rendre']) && $_POST['rendre']==$code.$numero){
+            $string4="UPDATE `emprunts` SET `daterendu`=CURRENT_DATE() WHERE `codelettres`='$code' AND `numero`='$numero'";
+            $query4=mysql_query($string4);
+        } else{
         echo $categorie.$oeuvres.$compositeurs.$interpretes.$rem.$code." ".$numero."<br/>";  //affichage des disques empruntés.
+        
         ?>
 
         <form action="" method="post">
-            <a href="index.php?page=administration"/>rendre</a><br/><br/>
+            <input type="submit" value="rendre" style="margin-top:20px; margin-bottom:20px; margin-right:10px;"/>
             <input type="hidden" name="trigramme" value="<?php echo $trigramme;?>" />
+            
+            <input type="hidden" name="rendre" value="<?php echo $code.$numero;?>" />
         </form>
+        <br/>
 
         <?php
-        //echo "<a href=\"index.php?page=administration\"/>rendre</a><br/><br/>";
+        }
+        
     }
 
 }
