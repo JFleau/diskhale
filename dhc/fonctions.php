@@ -206,4 +206,32 @@ function inscription(){
 
 
 }
-	?>	
+
+
+
+
+function emprunter($trigramme){
+    $numeroajout=$_POST['numero'];
+        $codeajout=$_POST['codelettres'];
+
+
+        $string5="SELECT `categorie` FROM `disques` WHERE `codelettres`='$codeajout' AND `numero`='$numeroajout'";
+        $query5=mysql_query($string5);
+        $tab5 = mysql_fetch_assoc($query5);
+        $cat2=$tab5['categorie'] ;
+
+        $string6="SELECT * FROM `clients` WHERE `trigramme`='$trigramme'";
+        $query6=mysql_query($string6);
+        $tab6 = mysql_fetch_assoc($query6);
+        $nom2=$tab6['nom'] ;
+        $prenom2=$tab6['prenom'] ;
+
+        $string7="INSERT INTO `emprunts` (`codelettres`,`numero`,`categorie`,
+        `trigramme`,`nom`,`prenom`,`dateemprunt`,`daterendu`) VALUES('$codeajout',
+        '$numeroajout','$cat2','$trigramme','$nom2','$prenom2',CURRENT_DATE(),'0000-00-00')";
+        //$query7=mysql_query($string7);
+        if (!mysql_query($string7)) echo 'Erreur SQL '.mysql_error().': '.$string7;
+}
+
+
+?>
