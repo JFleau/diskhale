@@ -58,15 +58,21 @@ foreach($t as $cle=>$val){
     $mec=mysql_query($string3);
     $string4="SELECT MAX(TO_DAYS(`daterendu`)-TO_DAYS(`dateemprunt`))
 FROM `emprunts` WHERE `trigramme`='$cle' AND `daterendu`!=0000-00-00";
-    $max=mysql_query($string4);
-
-    while($maxres = mysql_fetch_assoc($max)){
-        foreach($maxres as $clemax=>$valuemax){
-            $retardmax=$valuemax;
-            echo $retardmax;
-        }
-
+    $max1=mysql_query($string4);
+    $string5="SELECT MAX(TO_DAYS(CURRENT_DATE())-TO_DAYS(`dateemprunt`))
+FROM `emprunts` WHERE `trigramme`='$cle' AND `daterendu`=0000-00-00";
+    $max2=mysql_query($string5);
+    $maxres1=mysql_fetch_assoc($max1);
+    $ret1= $maxres1['MAX(TO_DAYS(`daterendu`)-TO_DAYS(`dateemprunt`))'];
+    $maxres2=mysql_fetch_assoc($max2);
+    $ret2= $maxres2['MAX(TO_DAYS(CURRENT_DATE())-TO_DAYS(`dateemprunt`))'];
+    if($ret1>$ret2){
+        $retardmax=$ret1;
     }
+    else{
+        $retardmax=$ret2;
+    }
+    
 
 
     while($pers = mysql_fetch_assoc($mec)){
@@ -78,6 +84,7 @@ FROM `emprunts` WHERE `trigramme`='$cle' AND `daterendu`!=0000-00-00";
         //echo $mail;
         //echo $nom." ".$prenom."<br/>";
     }
+    $nbreretard=0;
 
 
 
@@ -114,6 +121,7 @@ FROM `emprunts` WHERE `trigramme`='$cle' AND `daterendu`!=0000-00-00";
         $code=$res['codelettres'];
         $numcode=$res['numero'];
         $retard=$day-$day2;
+        $nbreretard++;
 ?>
 
 
@@ -132,6 +140,8 @@ FROM `emprunts` WHERE `trigramme`='$cle' AND `daterendu`!=0000-00-00";
     }
 
 ?>
+               <p><?php echo "plus grand retard = ".$retardmax;?></p>
+               <p><?php echo "nombre de retard = ".$nbreretard;?></p>
                <p><?php echo"<a href=\"mailto:".$mail."\">email</a>"; ?></p>
          </div>
 	</div>
