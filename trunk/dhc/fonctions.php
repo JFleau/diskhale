@@ -211,7 +211,7 @@ return $message;
 }
 
 function emprunter($trigramme){
-    $numeroajout=$_POST['numero'];
+    	$numeroajout=$_POST['numero'];
         $codeajout=$_POST['codelettres'];
 
 
