@@ -42,6 +42,7 @@ function logIn() {
                     $_SESSION['bienvenue']="Session administrateur";
                 }
                 else{
+					if (!isset($_SESSION['trigramme'])) $_SESSION['trigramme']=$trigramme; else $_SESSION['trigramme']=$trigramme;
                     $_SESSION['loggedIn']=1;
                     $array=mysql_fetch_assoc($result);
                     $_SESSION['bienvenue']="Bienvenue, <b>".$array['prenom']."</b> !";
@@ -55,6 +56,7 @@ function logIn() {
 function logOut() {
 	$_SESSION['loggedIn']=0;
 	$_SESSION['bienvenue']="0";
+	unset($_SESSION['trigramme']);
 }
 
 function nombreresultats() {
@@ -185,6 +187,7 @@ function inscription(){
                     if (!mysql_query($quer)) echo 'Erreur SQL '.mysql_error().': '.$quer;
                     else {
 					$_SESSION['loggedIn']=1;
+					if (!isset($_SESSION['trigramme'])) $_SESSION['trigramme']=$trigramme; else $_SESSION['trigramme']=$trigramme;
 					$_SESSION['bienvenue']="Bienvenue, <b>".$prenom."</b> !";
 					$message="Vous êtes désormais inscrits à la diskhâle classique.";
 
@@ -227,9 +230,11 @@ function emprunter($trigramme){
         $prenom2=$tab6['prenom'] ;
 
         $string7="INSERT INTO `emprunts` (`codelettres`,`numero`,`categorie`,
-        `trigramme`,`nom`,`prenom`,`dateemprunt`,`daterendu`) VALUES('$codeajout',
-        '$numeroajout','$cat2','$trigramme','$nom2','$prenom2',CURRENT_DATE(),'0000-00-00')";
+        `trigramme`,`dateemprunt`,`daterendu`) VALUES('$codeajout',
+        '$numeroajout','$cat2','$trigramme',CURRENT_DATE(),'0000-00-00')";
         //$query7=mysql_query($string7);
         if (!mysql_query($string7)) echo 'Erreur SQL '.mysql_error().': '.$string7;
+		else $message="Emprunt effectué avec succès.";
+		return $message;
 }
 	?>	

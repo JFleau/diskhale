@@ -149,7 +149,6 @@ $string2="SELECT * FROM `emprunts` WHERE `trigramme`='$trigramme' AND `daterendu
         
     }
 
-}
 
 ?>
 

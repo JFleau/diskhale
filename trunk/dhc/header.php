@@ -2,12 +2,6 @@
     <div id="contact"><table style="padding-left:430px; padding-top:280px;" cellpadding="5"><tr><td><b><div align="right">Tél <br />Horaires <br />Renseignements <br />Contact </div></b></td><td> 2630<br /> tous les jours, de 12h45 à 13h30<br />br.binet.diskhale.classique<br /><a href="mailto:dhc@frankiz.polytechnique.fr">écrire un mail</a></td></tr></table></div>
     
     <?php
-		if (isset($_POST['action'])) {
-			if ($_POST['action']=="inscription") {
-    		$message=inscription();
-			echo $_SESSION['loggedIn'];
-			}
-		}
 		if ($_SESSION['loggedIn']==0) {
 		echo '
     <form action="" method="post" style="padding-bottom:0px; margin-bottom:0px;">
@@ -50,11 +44,3 @@
 			echo '<a href="index.php?page=accueil"><img src="images/accueil_unselect.png" style="float:right; padding-top:10px;" onmouseover="this.src=\'images/accueil_hover.png\'" onmouseout="this.src=\'images/accueil_unselect.png\'"/></a>';
 	?>  
     </div>
-    <?php
-			if (isset($message)) {
-				if ($message!="") {
-				if ($message=="Vous êtes désormais inscrits à la diskhâle classique.") echo '<div id="message" style="background-color:#46D249; color:#003300; border-bottom-color:#003300;"><img src="images/OK.png" style="vertical-align:middle">&nbsp;&nbsp;'.$message.'</div>';
-				else echo '<div id="message" style="background-color:#DE7A7A; color:#990000; border-bottom-color:#990000;"><img src="images/Wrong.png" style="vertical-align:middle">&nbsp;&nbsp;'.$message.'</div>';
-				}
-			}
-?>
