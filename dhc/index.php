@@ -16,6 +16,18 @@
 	include "fonctions.php";
 	connect();
 	checkaction();
+	
+	if (isset($_POST['action'])) {
+		if ($_POST['action']=="inscription") {
+    	$message=inscription();
+		}
+	
+	if ($_POST['action']=="emprunter") {
+		if ($_SESSION['loggedIn']==1) $trigramme=$_SESSION['trigramme'];
+		if ($_SESSION['loggedIn']==2) $trigramme=$_POST['trigramme'];
+		$message=emprunter($trigramme);
+	}
+	}
     
 	if (!isset($_GET['page'])) {
 			$page="recherche";
@@ -76,14 +88,20 @@
 </head>
 
 <body bgcolor="#dddddd" marginheight="0" marginwidth="0" bottommargin="0" topmargin="0" rightmargin="0" leftmargin="0">
-
-
-    
     
 <div id="conteneur">
 
-	<?php include "header.php" ?>    
+	<?php include "header.php" ?> 
     
+    <?php   
+    	if (isset($message)) {
+			if ($message!="") {
+				if ($message=="Vous êtes désormais inscrits à la diskhâle classique."||$message=="Emprunt effectué avec succès.") echo '<div id="message" style="background-color:#46D249; color:#003300; border-bottom-color:#003300;"><img src="images/OK.png" style="vertical-align:middle">&nbsp;&nbsp;'.$message.'</div>';
+				else echo '<div id="message" style="background-color:#DE7A7A; color:#990000; border-bottom-color:#990000;"><img src="images/Wrong.png" style="vertical-align:middle">&nbsp;&nbsp;'.$message.'</div>';
+			}
+		}
+	?>
+
     <div id="content">
 	<?php include $url; ?>    
 	</div>
