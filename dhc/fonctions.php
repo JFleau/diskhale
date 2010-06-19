@@ -8,15 +8,14 @@ if ($_SESSION['loggedIn']==1) {
 	if ($page=="accueil"||$page=="madiskhale"||$page=="recherche") $authorized=true; else $authorized=false;
 	}
 if ($_SESSION['loggedIn']==2) {
-	if ($page=="accueil"||$page=="administration"||$page=="recherche"
-            ||$page=="retardataires") $authorized=true; else $authorized=false;
+	if ($page=="accueil"||$page=="administration"||$page=="recherche"||$page=="retardataires") $authorized=true; else $authorized=false;
 	}
 
 return $authorized;
 }
 
 function connect(){
-mysql_connect("localhost", "root", "root") or die("Erreur de connexion � MySQL");
+mysql_connect("localhost", "root", "2uh5ZpjB7CsceR3w") or die("Erreur de connexion � MySQL");
 mysql_select_db("dhc") or die("Erreur de connexion � la base de donn�es");
 mysql_query("SET NAMES UTF8");
 }
@@ -128,29 +127,29 @@ function recherche($begin) {
 
 function inscription(){
 
+	$message="";
 
-
-	if(isset($_POST["trigramme"]) && $_POST["trigramme"] != "" &&
-            isset($_POST["nom"]) && $_POST["nom"] != "" &&
-            isset($_POST["prenom"]) && $_POST["prenom"] != "" &&
-            isset($_POST["password"]) && $_POST["password"] != "" &&
-            isset($_POST["password2"]) && $_POST["password2"] != "" &&
-            $_POST["password2"] == $_POST["password"] &&
-            isset($_POST["mail"]) && $_POST["mail"] != "" &&
-            isset($_POST["kzert"]) && $_POST["kzert"] != "" &&
-            isset($_POST["tel"]) && $_POST["tel"] != "") {
+	if(isset($_POST['trigramme']) && $_POST['trigramme'] != "" &&
+            isset($_POST['nom']) && $_POST['nom'] != "" &&
+            isset($_POST['prenom']) && $_POST['prenom'] != "" &&
+            isset($_POST['password']) && $_POST['password'] != "" &&
+            isset($_POST['password2']) && $_POST['password2'] != "" &&
+            $_POST['password2'] == $_POST['password'] &&
+            isset($_POST['mail']) && $_POST['mail'] != "" &&
+            isset($_POST['kzert']) && $_POST['kzert'] != "" &&
+            isset($_POST['tel']) && $_POST['tel'] != "") {
 
 
             
-            $trigramme=$_POST["trigramme"];
-            $nom=$_POST["nom"];
-            $prenom=$_POST["prenom"];
-            $mdp1=$_POST["password"];
-            $email=$_POST["mail"];
-            $kzert=$_POST["kzert"];
-            $numero=$_POST["tel"];
-            $categorie=$_POST["categorie"];
-            $news=$_POST["news"];
+            $trigramme=$_POST['trigramme'];
+            $nom=$_POST['nom'];
+            $prenom=$_POST['prenom'];
+            $mdp1=$_POST['password'];
+            $email=$_POST['mail'].$_POST['ecole'];
+            $kzert=$_POST['kzert'];
+            $numero=$_POST['tel'];
+            $categorie=$_POST['categorie'];
+            $news=$_POST['news'];
             $remarques=" ";
             $statut=" ";
             $cotisation="non";
@@ -159,37 +158,41 @@ function inscription(){
             $trlen=strlen($trigramme);
 //            echo !is_numeric($kzert);
 //            echo !is_numeric($numero);
-            if($trlen!=3 || !is_int($kzert) || !is_int($numero)){
+            if($trlen!=3 || !is_numeric($kzert) || !is_numeric($numero)|| (int)$kzert!=$kzert|| (int)$numero!=$numero){
                 if($trlen!=3){
-                    echo "un trigramme contient 3 lettres!!!<br/>";
+                    $message="Un trigramme contient 3 lettres !";
                 }
                 if(!is_numeric($kzert) || (int)$kzert!=$kzert){
-                    echo "le champ kzert doit contenir un entier<br/>";
+                    $message="Le casert doit être un entier.";
                     //echo $kzert;
                     
                 }
                 if(!is_numeric($numero) || (int)$numero!=$numero){
-                    echo "le champ numero doit contenir un entier<br/>";
+                    $message="Le numéro de téléphone doit être un entier.";
                     //echo $numero;
                 }
             }
             
             else{
-                connect();
+                /* connect(); */
                 $tr=mysql_query("SELECT * FROM `clients` WHERE `trigramme`='$trigramme'");
                 $res=mysql_numrows($tr);
                 if($res==0){
                     $quer ="INSERT INTO `clients` (`trigramme`, `nom`, `prenom`,`password`,`categorie`,
                     `nbmax`,`remarques`,`email`, `kazert`,`telephone`, `statut`, `cotisation`,`caution`)
-                    VALUES('$trigramme', '$nom', '$prenom','$mdp1','$categorie',
-                    '5','$remarques','$email', '$kzert','$numero', '$statut', '$cotisation','$caution')";
+                    VALUES('".$trigramme."', '".$nom."', '".$prenom."','".$mdp1."','".$categorie."',
+                    '5','".$remarques."','".$email."', '".$kzert."','".$numero."', '".$statut."', '".$cotisation."','".$caution."')";
                     if (!mysql_query($quer)) echo 'Erreur SQL '.mysql_error().': '.$quer;
-                    else $_SESSION["loggedIn"]=1;
+                    else {
+					$_SESSION['loggedIn']=1;
+					$_SESSION['bienvenue']="Bienvenue, <b>".$prenom."</b> !";
+					$message="Vous êtes désormais inscrits à la diskhâle classique.";
 
+					}
                 }
 
                 else{
-                    echo "utilisateur déjà inscrit";
+                    $message="Le trigramme est déjà attribué.";
                 }
 
             }
@@ -197,18 +200,15 @@ function inscription(){
 
         elseif(isset($_POST['action'])){
 			if ($_POST['action']=="inscription") {
-            echo "le formulaire est mal rempli";
+            $message="Le formulaire est mal rempli !";
         }
 		}
 
 
-
+return $message;
 
 
 }
-
-
-
 
 function emprunter($trigramme){
     $numeroajout=$_POST['numero'];
@@ -232,6 +232,4 @@ function emprunter($trigramme){
         //$query7=mysql_query($string7);
         if (!mysql_query($string7)) echo 'Erreur SQL '.mysql_error().': '.$string7;
 }
-
-
-?>
+	?>	

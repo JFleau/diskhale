@@ -86,39 +86,49 @@
 		if ($nombre!=0) {
 		echo '<div id="bodyresultats">';
 		$numero=($num-1)*5;
+		
 		while ($row = mysql_fetch_assoc($tableau)) {
 		$numero=$numero+1;
 		$query='SELECT `intitule` FROM `type` WHERE `code` = \''.$row["categorie"].'\'';
 		$result=mysql_query($query);
 		$array=mysql_fetch_assoc($result);
 		$categorie=$array["intitule"];
-    	echo '<table border="0" style="margin:20px; margin-bottom:5px"><tr><td width="20" valign="top">'.$numero.'.</td>
-		<td><h3>'.$row["oeuvres"].'</h3>'.$row["compositeurs"].'<p style="font-size:11px;">';if ($row["interpretes"]!="") echo 'interprété par : '.$row["interpretes"];echo'</p><p style="color:#888888">'.$categorie.' &nbsp; | &nbsp; '.$row["codelettres"].' &nbsp; | &nbsp; '.$row["numero"].' </p></td></tr></table>';
+
+        $code=$row["codelettres"];
+        $numer=$row["numero"];
+        $strempr="SELECT `trigramme` FROM `emprunts` WHERE `codelettres`='$code' AND `numero`='$numer' AND `daterendu`='0000-00-00'";
+        $querempr=mysql_query($strempr);
+		if (mysql_num_rows($querempr)!=0) {
+			$array2=mysql_fetch_assoc($querempr);
+				if ($_SESSION['loggedIn']==2) $emprunt="emprunté par quelqu'un.";
+				if ($_SESSION['loggedIn']==1) $emprunt="Indisponible";
+				if ($_SESSION['loggedIn']==0) $emprunt="Indisponible";
+		}
+		else {
+				if ($_SESSION['loggedIn']==1) $emprunt='Disponible<form action="" method="post" name="emprunt"><input type="submit" value="emprunter"></form>';
+				if ($_SESSION['loggedIn']==2) $emprunt='Disponible<form action="" method="post" name="emprunt"><input type="text" name="trigramme" style="width:40px; margin-right:5px"><input type="submit" value="emprunter"></form>';
+				if ($_SESSION['loggedIn']==0) $emprunt="Disponible<br>Connectez-vous ou déplacez-vous pour emprunter.";
+		}
 		
-                $code=$row["codelettres"];
-                $numer=$row["numero"];
-                //echo $code;
-                //echo $numero;
-                $strempr="SELECT `trigramme` FROM `emprunts` WHERE `codelettres`='$code' AND `numero`='$numer' AND `daterendu`='0000-00-00'";
-                $querempr=mysql_query($strempr);
-                while ($tab = mysql_fetch_assoc($querempr)) {
-                      //echo $tab['trigramme'];
-                      $tri=$tab['trigramme'];
+    	echo '<table border="0" width="900" style="margin:20px; margin-bottom:5px"><tr><td width="20" valign="top">'.$numero.'.</td>
+		<td valign="top"><h3>'.$row["oeuvres"].'</h3>'.$row["compositeurs"].'<p style="font-size:11px;">';if ($row["interpretes"]!="") echo 'interprété par : '.$row["interpretes"];echo'</p><p style="color:#888888">'.$categorie.' &nbsp; | &nbsp; '.$row["codelettres"].' &nbsp; | &nbsp; '.$row["numero"].' </p></td><td width="170" bgcolor="#dddddd" style="border-left-style:solid; border-left-color:#444444"><div align="center">'.$emprunt.'</div></td></tr></table>';
+
+          /*            $tri=$tab['trigramme'];
                       $strtri="SELECT * FROM `clients` WHERE `trigramme`='$tri'";
                       $quertri=mysql_query($strtri);
+					  $emprunt="dispo";
                       while($tab2=mysql_fetch_assoc($quertri)){
                           if($_SESSION['loggedIn']==2){
-                              echo "emprut&eacute; par "."<a href=\"index.php?page=administration\">".$tab2['nom']." ".$tab2['prenom'].'</a><br />'.'<br />';  //revoir la mise en page corriger le nom de la page du lien
-                              $_POST['trigramme']=$tri;
+                              $emprunt="emprut&eacute; par ".'<a href=\"index.php?page=traiter\"/>'.$tab2['nom']." ".$tab2['prenom'].'</a><br />'.'<br />';  //revoir la mise en page corriger le nom de la page du lien
                           }
-                          else{
-                              echo "emprut&eacute; par ".$tab2['nom']." ".$tab2['prenom'];    //revoir la mise en page
+                          elseif ($_SESSION['loggedIn']==1) {
+                              $emprunt="indisponible";    //revoir la mise en page
+
                           }
                           
-                      }
+                      } */
                 }
-
-                }
+                
 
 
 

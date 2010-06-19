@@ -1,4 +1,6 @@
-    <div id="formulaire" class="formulaire" style="height:450px;">
+
+
+	<div id="formulaire" class="formulaire" style="height:450px;">
 	<h3>INSCRIVEZ-VOUS !</h3><hr size="2" style="margin-bottom:20px; margin-top:0px; padding:0px; size:1px; height:1px; border-top:none; border-width:1px; border-color:#FFFFFF"/>
     <form action="" method="post">
     <table border="0" style="text-align:right; vertical-align:middle" cellpadding="0">
@@ -37,8 +39,8 @@
     <td colspan="3" style="font-weight:normal; text-align:left">
     <input type="text" name="mail" style="width:240px;" value="<?php if(isset($_POST["mail"])){ echo $_POST["mail"];} else {echo "exemple: pierre.dupont";}?>" onFocus="this.value=verify(this,'exemple: pierre.dupont');" onblur="this.value=verify(this,'exemple: pierre.dupont');" />
     <select name="ecole" style="margin-right:3px; width:150px;">
-    	<option value="polytechnique.edu">@polytechnique.edu</option>
-        <option value="institutoptique.fr">@institutoptique.fr</option>
+    	<option value="@polytechnique.edu">@polytechnique.edu</option>
+        <option value="@institutoptique.fr">@institutoptique.fr</option>
     </select></td>
     </tr>
         
@@ -95,6 +97,3 @@
     </form>
     </div>
 
-<?php
-    inscription();
-?>
