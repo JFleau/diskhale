@@ -1,5 +1,3 @@
-
-
 	<div id="formulaire" class="formulaire" style="height:450px;">
 	<h3>INSCRIVEZ-VOUS !</h3><hr size="2" style="margin-bottom:20px; margin-top:0px; padding:0px; size:1px; height:1px; border-top:none; border-width:1px; border-color:#FFFFFF"/>
     <form action="" method="post">
