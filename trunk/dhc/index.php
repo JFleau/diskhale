@@ -52,6 +52,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=100" >
 <title>Diskhâle classique</title>
 <link rel="stylesheet" type="text/css" href="style2.css" />
+<script type="text/javascript" src="scripts/jquery-1.4.1.min.js"></script>
 <script type="text/javascript">
 <!--
 
@@ -82,6 +83,21 @@
    return 'Mois actuel : '+ nom[mois];
    };
    
+//-->
+</script>
+<script type="text/javascript">
+<!--
+	jQuery().ready(function() {
+		$(".cache").next("div").hide();
+		$(".cache").click(function() {
+		if ($(".cache").next("div").is(":hidden")) {
+				$(this).next("div").slideDown();
+		}
+		else {				
+				$(this).next("div").slideUp();
+		}
+		});
+	});
 //-->
 </script>
 

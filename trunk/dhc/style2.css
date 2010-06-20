@@ -71,13 +71,13 @@ padding-top:25px;
 float:left;
 }
 
-#header a
+#header a, .formulaire a
 {
 color:#FF9900;
 text-decoration:none;
 }
 
-#header a:hover
+#header a:hover, .formulaire a:hover
 {
 color:#CC0000;
 text-decoration:none;
@@ -112,10 +112,10 @@ font-size:11px;
  
 .formulaire p
 {
-padding:00px;
-line-height:25px;
-font-size:11px;
-
+padding:20px;
+line-height:20px;
+font-size:12px;
+color:#FFFFFF;
 } 
 
 .formulaire table
@@ -169,6 +169,29 @@ font-size: 13px;
 color: #242C2D;
 text-align:justify;
 line-height:20px;
+}
+
+#infos td
+{
+padding:5px;
+padding-left:15px;
+padding-right:10px;
+border-left-color:#4682b4;
+border-left-style:solid;
+border-left-width:6px;
+
+background-color:#f1f1f1;
+margin:00px;
+font-family: Tahoma, Helvetica, Arial,  Sans-Serif;
+font-size: 11px;
+color: #242C2D;
+text-align:justify;
+line-height:17px;
+}
+
+#infos table
+{
+margin-left:20px;
 }
 
 #infos p
