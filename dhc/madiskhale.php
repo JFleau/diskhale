@@ -34,7 +34,7 @@
     </div>
     <div id="infos" style="height:450px;">
     <h3>VOS EMPRUNTS</h3>
-    <p>Vous pouvez posséder jusqu'à 5 disques simultanément.</p>
+    <p>Vous pouvez posséder jusqu'à 5 disques simultanément. Les disques en retard sont indiqués en rouge.</p>
     <?php 	if ($nombre==0) echo '<p style="padding-top:0px;">Vous ne possédez actuellement aucun disque.</p>';
 			if ($nombre==1) echo '<p style="padding-top:0px;">Vous possédez actuellement <b>1</b> disque :</p>';
 			if ($nombre!=0&&$nombre!=1) echo '<p style="padding-top:0px;">Vous possédez actuellement <b>'.$nombre.'</b> disques :</p>';

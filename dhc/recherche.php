@@ -105,8 +105,8 @@
 				if ($_SESSION['loggedIn']==0) $emprunt="Indisponible";
 		}
 		else {
-				if ($_SESSION['loggedIn']==1) $emprunt='Disponible<form action="index.php?page=madiskhale" method="post" name="emprunt"><input type="hidden" name="action" value="emprunter"><input type="hidden" name="numero" value="'.$row["numero"].'"><input type="hidden" name="codelettres" value="'.$row["codelettres"].'"><input type="submit" value="emprunter"></form>';
-				if ($_SESSION['loggedIn']==2) $emprunt='Disponible<form action="" method="post" name="emprunt"><input type="hidden" name="action" value="emprunter"><input type="hidden" name="numero" value="'.$row["numero"].'"><input type="hidden" name="codelettres" value="'.$row["codelettres"].'"><input type="text" name="trigramme" style="width:40px; margin-right:5px"><input type="submit" value="emprunter"></form>';
+				if ($_SESSION['loggedIn']==1) $emprunt='Disponible<form action="index.php?page=madiskhale" method="post" name="emprunt"><input type="hidden" name="action" value="emprunter"><input type="hidden" name="numero" value="'.$row["numero"].'"><input type="hidden" name="categorie" value="'.$row["categorie"].'"><input type="hidden" name="codelettres" value="'.$row["codelettres"].'"><input type="submit" value="emprunter"></form>';
+				if ($_SESSION['loggedIn']==2) $emprunt='Disponible<form action="" method="post" name="emprunt"><input type="hidden" name="action" value="emprunter"><input type="hidden" name="numero" value="'.$row["numero"].'"><input type="hidden" name="codelettres" value="'.$row["codelettres"].'"><input type="text" name="trigramme" style="width:40px; margin-right:5px"><input type="hidden" name="categorie" value="'.$row["categorie"].'"><input type="submit" value="emprunter"></form>';
 				if ($_SESSION['loggedIn']==0) $emprunt="Disponible<br>Connectez-vous ou déplacez-vous pour emprunter.";
 		}
 		
