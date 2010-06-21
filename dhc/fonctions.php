@@ -15,7 +15,7 @@ return $authorized;
 }
 
 function connect(){
-mysql_connect("localhost", "root", "2uh5ZpjB7CsceR3w") or die("Erreur de connexion � MySQL");
+mysql_connect("localhost", "root", "root") or die("Erreur de connexion � MySQL");
 mysql_select_db("dhc") or die("Erreur de connexion � la base de donn�es");
 mysql_query("SET NAMES UTF8");
 }
@@ -318,7 +318,7 @@ function afficherformmodif(){
     <td colspan="4">Recevoir la newsletter de cette catégorie :
     <input checked="true" name="statut" value="oui" type="radio" style="width:20px; border:none" />oui
     <input name="news" value="non" type="radio"  style="width:20px; border:none" />non
-    <input type="hidden" name="action" value="inscription" /></td>
+    
     </tr>
 
     <?php
@@ -355,79 +355,100 @@ function afficherformmodif(){
 function modifier($trigramme){
     
     $a=array("password","password2","trigramme2","nom","prenom","kazert","telephone",
-        "email","categorie","statut","cotisation","caution");
+        "email","categorie","statut","cotisation","caution","oldpassword");
 
-    if(isset($_POST[$a[0]]) && isset($_POST[$a[1]]) && $_POST[$a[0]]!="" && $_POST[$a[0]]==$_POST[$a[1]]){
-        //$trigramme=$_SESSION['trigramme'];
-        $pass=$_POST[$a[1]];
-        $query="UPDATE `clients` SET `password`='$pass' WHERE `trigramme`='$trigramme'";
-        if (!mysql_query($query)) echo 'Erreur SQL '.mysql_error().': '.$query;
-    }
-
-    if(isset($_POST[$a[2]]) && $_POST[$a[2]]!=""){
-        if($_POST[$a[2]]!="exemple: DHC"){
-            $trlen=strlen($_POST[$a[2]]);
-            if($trlen!=3){
-                echo "un trigramme contient 3 lettres!!!<br/>";
-            }
-            else{
-                $trigramme=$_POST[$a[2]];
-                $sql2 =mysql_query("SELECT * FROM `clients` WHERE `trigramme`='$trigramme'");
-                $res=mysql_numrows($sql2);
-                if($res>0){
-                    echo "trigramme deja utilise";
+    $trigramme=$_SESSION['trigramme'];
+    if(isset($_POST[$a[12]]) && $_POST[$a[12]]!=""){
+        $pwd=$_POST[$a[12]];
+        $s="SELECT * FROM `clients` WHERE `trigramme`='$trigramme' AND `password`='$pwd'";
+        $se=mysql_query($s);
+        $re=mysql_numrows($se);
+                if($re=0){
+                    echo "autorisation refusee";
                 }
                 else{
-                    $newtri=$_POST[$a[2]];
-                    $query="UPDATE `clients` SET `trigramme`='$newtri' WHERE `trigramme`='$trigramme'";
+
+                    if(isset($_POST[$a[0]]) && isset($_POST[$a[1]]) && $_POST[$a[0]]!="" && $_POST[$a[0]]==$_POST[$a[1]]){
+                    //$trigramme=$_SESSION['trigramme'];
+                    $pass=$_POST[$a[1]];
+                    $query="UPDATE `clients` SET `password`='$pass' WHERE `trigramme`='$trigramme'";
                     if (!mysql_query($query)) echo 'Erreur SQL '.mysql_error().': '.$query;
+                    }
+
+                    if(isset($_POST[$a[2]]) && $_POST[$a[2]]!=""){
+                        if($_POST[$a[2]]!="exemple: DHC"){
+                            $trlen=strlen($_POST[$a[2]]);
+                            if($trlen!=3){
+                                echo "un trigramme contient 3 lettres!!!<br/>";
+                            }
+                            else{
+                                $trigramme=$_POST[$a[2]];
+                                $sql2 =mysql_query("SELECT * FROM `clients` WHERE `trigramme`='$trigramme'");
+                                $res=mysql_numrows($sql2);
+                                if($res>0){
+                                    echo "trigramme deja utilise";
+                                }
+                                else{
+                                    $newtri=$_POST[$a[2]];
+                                    $query="UPDATE `clients` SET `trigramme`='$newtri' WHERE `trigramme`='$trigramme'";
+                                    if (!mysql_query($query)) echo 'Erreur SQL '.mysql_error().': '.$query;
+                                }
+
+
+                            }
+                        }
+
+                    }
+
+                    for($i=3;$i<12;$i++){
+
+                        if(isset($_POST[$a[$i]]) && $_POST[$a[$i]]!=""){
+                            $trigramme=$_SESSION['trigramme'];
+                            $cle=$a[$i];
+                            $val=$_POST[$cle];
+
+                            if($cle=="kazert"){
+                                if($val!="exemple: 691009"){
+                                    if(!is_numeric($val) || (int)$val!=$val ){
+                                        echo "le champ kzert doit contenir un entier";
+                                    }
+                                    else{
+                                        $query="UPDATE `clients` SET `$cle`='$val' WHERE `trigramme`='$trigramme'";
+                                        if (!mysql_query($query)) echo 'Erreur SQL '.mysql_error().': '.$query;
+                                    }
+                                }
+
+
+                            }
+                            elseif($cle=="telephone" ){
+                                if($val!="exemple: 6419"){
+                                    if(!is_numeric($val) || (int)$val!=$val){
+                                        echo "le champ telephone doit contenir un entier";
+                                    }
+                                    else{
+                                        $query="UPDATE `clients` SET `$cle`='$val' WHERE `trigramme`='$trigramme'";
+                                        if (!mysql_query($query)) echo 'Erreur SQL '.mysql_error().': '.$query;
+                                    }
+                                }
+
+                            }
+                            else{
+                                $query="UPDATE `clients` SET `$cle`='$val' WHERE `trigramme`='$trigramme'";
+                                if (!mysql_query($query)) echo 'Erreur SQL '.mysql_error().': '.$query;
+                            }
+
+                        }
+                    }
+
                 }
-
-
-            }
-        }
-
+    }
+    elseif(isset($_POST['action']) && $_POST['action']=='modifier'){
+        echo "autorisation refusee";
     }
 
-    for($i=3;$i<12;$i++){
-        
-        if(isset($_POST[$a[$i]]) && $_POST[$a[$i]]!=""){
-            $trigramme=$_SESSION['trigramme'];
-            $cle=$a[$i];
-            $val=$_POST[$cle];
 
-            if($cle=="kazert"){
-                if($val!="exemple: 691009"){
-                    if(!is_numeric($val) || (int)$val!=$val ){
-                        echo "le champ kzert doit contenir un entier";
-                    }
-                    else{
-                        $query="UPDATE `clients` SET `$cle`='$val' WHERE `trigramme`='$trigramme'";
-                        if (!mysql_query($query)) echo 'Erreur SQL '.mysql_error().': '.$query;
-                    }
-                }
-                
-                
-            }
-            elseif($cle=="telephone" ){
-                if($val!="exemple: 6419"){
-                    if(!is_numeric($val) || (int)$val!=$val){
-                        echo "le champ telephone doit contenir un entier";
-                    }
-                    else{
-                        $query="UPDATE `clients` SET `$cle`='$val' WHERE `trigramme`='$trigramme'";
-                        if (!mysql_query($query)) echo 'Erreur SQL '.mysql_error().': '.$query;
-                    }
-                }
-               
-            }
-            else{
-                $query="UPDATE `clients` SET `$cle`='$val' WHERE `trigramme`='$trigramme'";
-                if (!mysql_query($query)) echo 'Erreur SQL '.mysql_error().': '.$query;
-            }
-            
-        }
-    }
+
+    
 
 
     
