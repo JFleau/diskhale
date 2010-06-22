@@ -104,7 +104,7 @@ if(isset($_POST["trigramme"])){
 
 //affichage des disques empruntés.
 
-$string2="SELECT * FROM `emprunts` WHERE `trigramme`='$trigramme' AND `daterendu`=0000-00-00 ";
+$string2="SELECT * FROM `emprunts` WHERE `trigramme`='".$trigramme."' AND `daterendu`=0000-00-00 ";
     $query2=mysql_query($string2);
     while($tab2 = mysql_fetch_assoc($query2)){
         $code=$tab2['codelettres'];
@@ -112,7 +112,7 @@ $string2="SELECT * FROM `emprunts` WHERE `trigramme`='$trigramme' AND `daterendu
         $categorie=$tab2['categorie'];
         if($tab2['categorie']!=""){ $categorie=$categorie."<br/>";}
 
-        $string3="SELECT * FROM `disques` WHERE `codelettres`='$code' AND `numero`='$numero' ";
+        $string3="SELECT * FROM `disques` WHERE `codelettres`='".$code."' AND `numero`='".$numero."' ";
         $query3=mysql_query($string3);
         while($tab3 = mysql_fetch_assoc($query3)){
             $oeuvres=$tab3['oeuvres'];
@@ -126,7 +126,7 @@ $string2="SELECT * FROM `emprunts` WHERE `trigramme`='$trigramme' AND `daterendu
         }
 
         if(isset($_POST['rendre']) && $_POST['rendre']==$code.$numero){
-            $string4="UPDATE `emprunts` SET `daterendu`=CURRENT_DATE() WHERE `codelettres`='$code' AND `numero`='$numero'";
+            $string4="UPDATE `emprunts` SET `daterendu`=CURRENT_DATE() WHERE `codelettres`='".$code."' AND `numero`='".$numero."'";
             $query4=mysql_query($string4);
         } else{
         echo $categorie.$oeuvres.$compositeurs.$interpretes.$rem.$code." ".$numero."<br/>";  //affichage des disques empruntés.
