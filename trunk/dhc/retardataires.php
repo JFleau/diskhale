@@ -148,7 +148,5 @@ FROM `emprunts` WHERE `trigramme`='$cle' AND `daterendu`=0000-00-00";
 
 <?php
 }
-
-
 ?>
 
