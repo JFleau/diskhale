@@ -23,9 +23,18 @@
 		}
 	
 	if ($_POST['action']=="emprunter") {
-		if ($_SESSION['loggedIn']==1) $trigramme=$_SESSION['trigramme'];
-		if ($_SESSION['loggedIn']==2) $trigramme=$_POST['trigramme'];
-		$message=emprunter($trigramme);
+		if ($_SESSION['loggedIn']==1) {
+			$trigramme=$_SESSION['trigramme'];
+			$message=emprunter($trigramme);
+
+		}
+		if ($_SESSION['loggedIn']==2) {
+			$trigramme=$_POST['trigramme'];
+			$query="SELECT * FROM `clients` WHERE `trigramme`='".$_POST['trigramme']."'";
+			$result=mysql_query($query);
+			$num=mysql_num_rows($result);
+			if ($num!=1) $message="Trigramme inconnu."; else $message=emprunter($trigramme);
+		}
 	}
 	}
     

@@ -40,9 +40,9 @@
 
     <tr>
     <td colspan="2">Code lettres</td>
-    <td><div align="left"><input type="text" name="code" style="width:55px;" value="<?php if(isset($_POST["code"])) echo $_POST["code"];?>" /></div></td>
+    <td><div align="left"><input type="text" name="code" style="width:55px;" value="" /></div></td>
     <td>Numéro
-    <input type="text" name="numero" style="width:55px;" value="<?php if(isset($_POST["numero"])) echo $_POST["numero"];?>" /></td>
+    <input type="text" name="numero" style="width:55px;" value="" /></td>
     </tr>
             
     <tr><td height="20" colspan="3"></td><td></td></tr>
@@ -105,8 +105,8 @@
 				if ($_SESSION['loggedIn']==0) $emprunt="Indisponible";
 		}
 		else {
-				if ($_SESSION['loggedIn']==1) $emprunt='Disponible<form action="index.php?page=madiskhale" method="post" name="emprunt"><input type="hidden" name="action" value="emprunter"><input type="hidden" name="numero" value="'.$row["numero"].'"><input type="hidden" name="codelettres" value="'.$row["codelettres"].'"><input type="submit" value="emprunter"></form>';
-				if ($_SESSION['loggedIn']==2) $emprunt='Disponible<form action="" method="post" name="emprunt"><input type="hidden" name="action" value="emprunter"><input type="hidden" name="numero" value="'.$row["numero"].'"><input type="hidden" name="codelettres" value="'.$row["codelettres"].'"><input type="text" name="trigramme" style="width:40px; margin-right:5px"><input type="submit" value="emprunter"></form>';
+				if ($_SESSION['loggedIn']==1) $emprunt='Disponible<form action="index.php?page=madiskhale" method="post" name="emprunt"><input type="hidden" name="action" value="emprunter"><input type="hidden" name="numero" value="'.$row["numero"].'"><input type="hidden" name="categorie" value="'.$row["categorie"].'"><input type="hidden" name="codelettres" value="'.$row["codelettres"].'"><input type="submit" value="emprunter"></form>';
+				if ($_SESSION['loggedIn']==2) $emprunt='Disponible<form action="" method="post" name="emprunt"><input type="hidden" name="action" value="emprunter"><input type="hidden" name="numero" value="'.$row["numero"].'"><input type="hidden" name="categorie" value="'.$row["categorie"].'"><input type="hidden" name="codelettres" value="'.$row["codelettres"].'"><input type="text" name="trigramme" style="width:40px; margin-right:5px"><input type="submit" value="emprunter"></form>';
 				if ($_SESSION['loggedIn']==0) $emprunt="Disponible<br>Connectez-vous ou déplacez-vous pour emprunter.";
 		}
 		
