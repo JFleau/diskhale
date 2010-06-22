@@ -1,10 +1,19 @@
+    <SCRIPT language=javascript>
+   function ConfirmMessage() {
+       if (confirm("Voulez vous supprimer l\'utilisateur ?")) { // Clic sur OK
+           document.write ('<a href="index.php" ></a>');
+           
+       }
+   }
+    </SCRIPT>
+
 <div id="formulaire" class="formulaire" style="height:200px;">
 	<h3>Traiter Client</h3><hr size="2" style="margin-bottom:20px; margin-top:0px; padding:0px; size:1px; height:1px; border-top:none; border-width:1px; border-color:#FFFFFF"/>
     <form action="" method="post">
     <table border="0" style="text-align:right; vertical-align:middle" cellpadding="0" align="center">
     <tr>
     <td width="" colspan="3">Trigramme</td>
-    <td width=""><input type="text" name="trigramme" value="<?php if(isset($_POST["trigramme"])) echo $_POST["trigramme"];?>" /></td>
+    <td width=""><input type="text" name="trigramme" value="<?php if(isset($_POST["trigramme"]) && $_POST["trigramme"]!='dhc') echo $_POST["trigramme"];?>" /></td>
     </tr>
     </table>
         <div align="right">
@@ -20,12 +29,13 @@
 
 <?php
 
-if(isset($_POST["trigramme"])){
+if(isset($_POST["trigramme"]) && $_POST['trigramme']!=""){
     $trigramme=$_POST["trigramme"];
     $string="SELECT * FROM `clients` WHERE `trigramme`='$trigramme'";
     $query=mysql_query($string);
-    while($tab = mysql_fetch_assoc($query)){
+    $tab = mysql_fetch_assoc($query);
         $nom=$tab['nom'];
+        $prenom=$tab['prenom'];
         $remarque=$tab['remarques'];
         $categorie=$tab['categorie'];
         $mail=$tab['email'];
@@ -34,16 +44,22 @@ if(isset($_POST["trigramme"])){
         $kzert=$tab['kazert'];
         $cotis=$tab['cotisation'];
         $caution=$tab['caution'];
+    
+    
+
+        if($_GET['u']){
+        $trigramme=$_POST['trigramme'];
+        suppr_trig($trigramme);
     }
 
-
+    //if($nom!=""){
     //affichage de l emprunteur
     echo '<div id="headresultats"><h3 style="padding-left:10px">'.$nombre.' Traiter Client</h3>';
     echo '</div>';
     echo '<div id="bodyresultats">';
     echo '<table border="0" style="margin:20px; margin-bottom:5px">
     <tr>
-    <h3>'.$nom." ".$prenom.'('.$categorie.')'.'</h3>'.      //affichage de l'emprunteur
+    <h3>'.$nom." ".$prenom.'</h3>'.      //affichage de l'emprunteur
     '<h3>'.$remarque.'</h3>'.
     '<h3>'.$tel.'</h3>'.
     '<h3>'.$nbmax.'</h3>'.
@@ -51,12 +67,31 @@ if(isset($_POST["trigramme"])){
     '<h3>'.$remarques.'</h3>'.
     "<h3><a href=\"mailto:".$mail."\">email</a></h3>";
 
+
+;
+    ?>
+    <form method="post" action="">
+
+        <input type="hidden" name="trigramme" value="<?php if(isset($_POST['trigramme'])){echo $_POST['trigramme'];}?>"/>
+        <input type="submit" value="Supprimer" onClick="ConfirmMessage()"/>
+    </form>
+
+    <?php
+    echo $_GET['u'];
+    
+
+    
+
     if($cotis=="non"){
         echo "<h3>Cotisation non payee</h3>";
     }
     if($caution=="non"){
         echo "<h3>Caution non payee</h3>";
     }
+
+    
+
+    
 
 
 
@@ -95,6 +130,8 @@ if(isset($_POST["trigramme"])){
 </div>
 
 <?php
+    //}
+}
     //ajout d'emprunts;
     if(isset($_POST['codelettres']) && $_POST['codelettres']!=""
         && isset($_POST['numero']) && $_POST['numero']!=""){
@@ -104,7 +141,7 @@ if(isset($_POST["trigramme"])){
 
 //affichage des disques empruntés.
 
-$string2="SELECT * FROM `emprunts` WHERE `trigramme`='".$trigramme."' AND `daterendu`=0000-00-00 ";
+$string2="SELECT * FROM `emprunts` WHERE `trigramme`='$trigramme' AND `daterendu`=0000-00-00 ";
     $query2=mysql_query($string2);
     while($tab2 = mysql_fetch_assoc($query2)){
         $code=$tab2['codelettres'];
@@ -112,7 +149,7 @@ $string2="SELECT * FROM `emprunts` WHERE `trigramme`='".$trigramme."' AND `dater
         $categorie=$tab2['categorie'];
         if($tab2['categorie']!=""){ $categorie=$categorie."<br/>";}
 
-        $string3="SELECT * FROM `disques` WHERE `codelettres`='".$code."' AND `numero`='".$numero."' ";
+        $string3="SELECT * FROM `disques` WHERE `codelettres`='$code' AND `numero`='$numero' ";
         $query3=mysql_query($string3);
         while($tab3 = mysql_fetch_assoc($query3)){
             $oeuvres=$tab3['oeuvres'];
@@ -126,7 +163,7 @@ $string2="SELECT * FROM `emprunts` WHERE `trigramme`='".$trigramme."' AND `dater
         }
 
         if(isset($_POST['rendre']) && $_POST['rendre']==$code.$numero){
-            $string4="UPDATE `emprunts` SET `daterendu`=CURRENT_DATE() WHERE `codelettres`='".$code."' AND `numero`='".$numero."'";
+            $string4="UPDATE `emprunts` SET `daterendu`=CURRENT_DATE() WHERE `codelettres`='$code' AND `numero`='$numero'";
             $query4=mysql_query($string4);
         } else{
         echo $categorie.$oeuvres.$compositeurs.$interpretes.$rem.$code." ".$numero."<br/>";  //affichage des disques empruntés.
@@ -144,11 +181,8 @@ $string2="SELECT * FROM `emprunts` WHERE `trigramme`='".$trigramme."' AND `dater
         <?php
         }
         
-    }
+    
 
 }
 ?>
-
-
-
 

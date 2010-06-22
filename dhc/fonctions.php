@@ -1,5 +1,53 @@
 <?php
 
+
+
+function suppr_trig($trigramme){
+
+
+//    if(ConfirmMessage()){
+        $query="SELECT * FROM `emprunts` WHERE `trigramme` = '".$trigramme."' AND `daterendu`=0000-00-00";
+        $res=mysql_query($query);
+        if(mysql_numrows($res) == 0){
+            $query2="DELETE FROM `dhc`.`clients` WHERE `clients`.`trigramme` = '".$trigramme."'";
+            mysql_query($query2);
+            echo "Client supprimé";
+        }
+        else{
+            echo "Il reste des emprunts : voulez-vous les supprimer ?";
+//            echo<<<END
+//                <form action="" method=post>
+//                <input checked="true" name="suppr" value="oui" type="radio" style="width:20px; border:none" />oui
+//                <input name="suppr" value="non" type="radio"  style="width:20px; border:none" />non
+//                <input type="submit" value="Valider"/>
+//                </br>
+//                </br>
+//END;
+//            if($_POST['suppr'] == 'oui'){
+//                $query4="DELETE FROM `dhc`.`clients` WHERE `clients`.`trigramme` = '".$trigramme."'";
+//                $query3="DELETE FROM `emprunts` WHERE `trigramme`='".$trigramme."'";
+//                mysql_query($query4);
+//                mysql_query($query3);
+//            }
+//            elseif($_POST['suppr'] == 'non'){
+//                echo "Suppression du client annulée";
+//            }
+        }
+        $result=mysql_query($query);
+        return $result;
+    }
+//}
+
+    
+    
+
+
+
+
+?>
+
+<?php
+
 function authorized($page) {
 if ($_SESSION['loggedIn']==0) {
 	if ($page=="accueil"||$page=="inscription"||$page=="recherche") $authorized=true; else $authorized=false;
@@ -15,7 +63,7 @@ return $authorized;
 }
 
 function connect(){
-mysql_connect("localhost", "root", "2uh5ZpjB7CsceR3w") or die("Erreur de connexion � MySQL");
+mysql_connect("localhost", "root", "root") or die("Erreur de connexion � MySQL");
 mysql_select_db("dhc") or die("Erreur de connexion � la base de donn�es");
 mysql_query("SET NAMES UTF8");
 }
@@ -248,114 +296,6 @@ function emprunter($trigramme){
 
 
 
-function afficherformmodif(){
-    ?>
-
-
-
-
-    <div id="formulaire" class="formulaire" style="height:470px;">
-	<h3>Modifier son compte</h3><hr size="2" style="margin-bottom:20px; margin-top:0px; padding:0px; size:1px; height:1px; border-top:none; border-width:1px; border-color:#FFFFFF"/>
-    <form action="" method="post">
-    <table border="0" style="text-align:right; vertical-align:middle" cellpadding="0">
-    <tr>
-    <td width="250" colspan="3">Trigramme souhaité</td>
-    <td width=""><input type="text" name="trigramme2" value="<?php if(isset($_POST["trigramme2"])){ echo $_POST["trigramme2"];} else {echo 'exemple: DHC';}?>" onFocus="this.value=verify(this,'exemple: DHC');" onblur="this.value=verify(this,'exemple: DHC');" /></td>
-    </tr>
-    <tr>
-    <td colspan="3">Nouveau mot de passe</td>
-    <td><input type="password" name="password" /></td>
-    </tr>
-    <tr>
-    <td colspan="3">Confirmer le mot de passe</td>
-    <td><input type="password" name="password2" /></td>
-    </tr>
-
-    <tr><td height="20" colspan="3"></td><td></td></tr>
-
-    <tr>
-    <td>Nom</td>
-    <td><input type="text" name="nom" value="<?php if(isset($_POST["nom"])){ echo $_POST["nom"];} ?>" /></td>
-    <td>Prénom</td>
-    <td><input type="text" name="prenom" value="<?php if(isset($_POST["prenom"])){ echo $_POST["prenom"];} ?>" /></td>
-    </tr>
-    <tr>
-    <td>Casert</td>
-    <td><input type="text" name="kazert" value="<?php if(isset($_POST["kzert"])){ echo $_POST["kzert"];} else{ echo 'exemple: 691009';} ?>" onFocus="this.value=verify(this,'exemple: 691009');" onblur="this.value=verify(this,'exemple: 691009');" /></td>
-    <td>Téléphone</td>
-    <td><input type="text" name="telephone" value="<?php if(isset($_POST["tel"])){ echo $_POST["tel"];} else{ echo 'exemple: 6419';}?>" onFocus="this.value=verify(this,'exemple: 6419');" onblur="this.value=verify(this,'exemple: 6419');" /></td>
-    </tr>
-
-    <tr><td height="20" colspan="3"></td><td></td></tr>
-
-    <tr>
-    <td>e-mail</td>
-    <td colspan="3" style="font-weight:normal; text-align:left">
-    <input type="text" name="email" style="width:240px;" value="<?php if(isset($_POST["mail"])){ echo $_POST["mail"];} else {echo "exemple: pierre.dupont";}?>" onFocus="this.value=verify(this,'exemple: pierre.dupont');" onblur="this.value=verify(this,'exemple: pierre.dupont');" />
-    <select name="ecole" style="margin-right:3px; width:150px;">
-    	<option value="polytechnique.edu">@polytechnique.edu</option>
-        <option value="institutoptique.fr">@institutoptique.fr</option>
-    </select></td>
-    </tr>
-
-    <tr><td height="20" colspan="3"></td><td></td></tr>
-
-    <tr>
-    <td colspan="2">Catégorie préférée</td>
-    <td colspan="2">
-    <select name="categorie" style="margin-right:3px; width:230px">
-         <option value="">-</option>
-         <option value="classique">Classique</option>
-         <option value="opera">Op&eacute;ra</option>
-         <option value="interprete">Interprète</option>
-         <option value="jazz">Jazz</option>
-         <option value="varietes">Vari&eacute;t&eacute;s</option>
-         <option value="film">Musique de film</option>
-         <option value="compil">Compilations</option>
-         <option value="anc">Musique ancienne + Liturgies</option>
-         <option value="tradi">Musiques traditionnelles</option>
-         <option value="electro">Electromusique</option>
-         <option value="mili">Musique militaire</option>
-         <option value="part">Partitions</option>
-    </select>
-    </td>
-    </tr>
-    <tr>
-    <td colspan="4">Recevoir la newsletter de cette catégorie :
-    <input checked="true" name="statut" value="oui" type="radio" style="width:20px; border:none" />oui
-    <input name="news" value="non" type="radio"  style="width:20px; border:none" />non
-    
-    </tr>
-
-    <?php
-    if($_SESSION['loggedIn']==2){
-    ?>
-
-    <tr>
-    <td colspan="3">Cotisation</td>
-    <td><input type="text" name="cotisation" /></td>
-    </tr>
-    <tr>
-    <td colspan="3">Caution</td>
-    <td><input type="text" name="caution" /></td>
-    </tr>
-
-    <?php
-    }
-    ?>
-
-    <tr><td height="20" colspan="3"></td><td></td></tr>
-
-	</table>
-
-	<div align="right">
-            <input type="reset" value="Annuler" style="margin-top:20px; margin-bottom:20px; margin-right:10px; width:auto"/>
-            <input type="submit" value="Modifier" style="margin-top:20px; margin-bottom:20px; margin-right:10px;"/></div>
-    </form>
-    </div>
-
-<?php
-}
 
 
 function modifier($trigramme){
