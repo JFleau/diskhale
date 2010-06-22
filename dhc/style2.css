@@ -45,7 +45,6 @@ width:960px;
 margin-left:auto;
 margin-right:auto;
 margin-top:0px;
-background-color: #FFFFFF;
 font-size:36px;
 }
 
@@ -85,7 +84,6 @@ text-decoration:none;
 
 #content
 {
-background-color:#ffffff;
 height:auto;
 padding:00px;
 }
@@ -160,7 +158,7 @@ float:left;
 padding-left:5px;
 }
 
-#infos
+#infos, #infos2
 {
 padding:10px;
 margin:00px;
@@ -169,6 +167,8 @@ font-size: 13px;
 color: #242C2D;
 text-align:justify;
 line-height:20px;
+background-color:#ffffff;
+
 }
 
 #infos td
@@ -180,18 +180,52 @@ border-left-color:#4682b4;
 border-left-style:solid;
 border-left-width:6px;
 
-background-color:#f1f1f1;
+background-color:#4682b4;
 margin:00px;
 font-family: Tahoma, Helvetica, Arial,  Sans-Serif;
 font-size: 11px;
-color: #242C2D;
+color: #ffffff;
 text-align:justify;
 line-height:17px;
 }
 
+#disques
+{
+padding:5px;
+padding-left:15px;
+padding-right:10px;
+border-left-color:#4682b4;
+border-left-style:solid;
+border-left-width:6px;
+width:441px;
+background-color:#4682b4;
+margin:00px;
+margin-top:2px;
+font-family: Tahoma, Helvetica, Arial,  Sans-Serif;
+font-size: 11px;
+color: #ffffff;
+text-align:justify;
+line-height:17px;
+}
+
+#disquevide
+{
+height:85px;
+background-color:#bbbbbb;
+margin-top:2px;
+width:441px;
+padding:5px;
+padding-left:15px;
+padding-right:10px;
+border-left-color:#bbbbbb;
+border-left-style:solid;
+border-left-width:6px;
+
+}
+
 #infos table
 {
-margin-left:20px;
+margin-left:00px;
 }
 
 #infos p
@@ -205,7 +239,18 @@ text-align:justify;
 line-height:18px;
 }
 
-#infos h3
+#infos2 p
+{
+padding:10px;
+margin-right:000px;
+font-family: Tahoma, Helvetica, Arial, Sans-Serif;
+font-size: 13px;
+color: #242C2D;
+text-align:justify;
+line-height:18px;
+}
+
+#infos h3, #infos2 h3
 {
   font-family: Geneva, Arial, Verdana, Helvetica, Sans-Serif;
   font-size: 19px;
