@@ -6,7 +6,7 @@
 		$array=mysql_fetch_assoc($result);
 	?>
     <?php
-		$query2="SELECT `codelettres`,`numero`,`categorie` FROM `emprunts` WHERE `trigramme`='".$_SESSION['trigramme']."' AND `daterendu`='0000-00-00'";
+		$query2="SELECT `codelettres`,`numero`,`categorie`,`dateemprunt` FROM `emprunts` WHERE `trigramme`='".$_SESSION['trigramme']."' AND `daterendu`='0000-00-00'";
 		$result2=mysql_query($query2);
 		$nombre=mysql_num_rows($result2);
 	?>
@@ -50,9 +50,8 @@
 				$query3="SELECT `oeuvres`,`compositeurs`,`categorie`,`codelettres`,`numero` FROM `disques` WHERE `codelettres`='".$array2['codelettres']."' AND `numero`='".$array2['numero']."' AND `categorie`='".$array2['categorie']."'";
 				$result3=mysql_query($query3);
 				$array3=mysql_fetch_assoc($result3);
-
     			echo 	'<div id="disques">
-   						<b>'.$array3["oeuvres"].'</b><br />'.$array3["compositeurs"].'<br /><font color="#cccccc">'.$array3["categorie"].' | '.$array3["codelettres"].' | '.$array3["numero"].'</font><br /><br style="line-height:10px;" /><font color="#ffffff">Emprunté le : 19-06-2010</font>
+   						<b>'.$array3["oeuvres"].'</b><br />'.$array3["compositeurs"].'<br /><font color="#cccccc">'.$array3["categorie"].' | '.$array3["codelettres"].' | '.$array3["numero"].'</font><br /><br style="line-height:10px;" /><font color="#ffffff">Emprunté le : '.$array2['dateemprunt'].'</font>
     					</div>';
 			}
 			
