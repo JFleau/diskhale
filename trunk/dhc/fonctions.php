@@ -225,19 +225,19 @@ function emprunter($trigramme){
 		
 		if ($num!=0) return "Erreur. Vous avez déjà emprunté ce disque.";
 		
-        $string6="SELECT * FROM `clients` WHERE `trigramme`='$trigramme'";
+        $string6="SELECT * FROM `clients` WHERE `trigramme`='".$trigramme."'";
         $query6=mysql_query($string6);
         $tab6 = mysql_fetch_assoc($query6);
         $nom2=$tab6['nom'] ;
         $prenom2=$tab6['prenom'] ;
 	
-		$query2="SELECT * FROM `emprunts` WHERE `trigramme`='".$trigramme."'";
+		$query2="SELECT * FROM `emprunts` WHERE `trigramme`='".$trigramme."' AND `daterendu`='0000-00-00'";
 		$result2=mysql_query($query2);
 		$nombre=mysql_num_rows($result2);
 		if ($nombre<5) {
         $string7="INSERT INTO `emprunts` (`codelettres`,`numero`,`categorie`,
-        `trigramme`,`dateemprunt`,`daterendu`) VALUES('$codeajout',
-        '$numeroajout','$cat2','$trigramme',CURRENT_DATE(),'0000-00-00')";
+        `trigramme`,`dateemprunt`,`daterendu`) VALUES('".$codeajout."',
+        '".$numeroajout."','".$cat2."','".$trigramme."',CURRENT_DATE(),'0000-00-00')";
         //$query7=mysql_query($string7);
         if (!mysql_query($string7)) echo 'Erreur SQL '.mysql_error().': '.$string7;
 		else return "Emprunt effectué avec succès.";

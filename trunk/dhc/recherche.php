@@ -96,7 +96,7 @@
 
         $code=$row["codelettres"];
         $numer=$row["numero"];
-        $strempr="SELECT `trigramme` FROM `emprunts` WHERE `codelettres`='$code' AND `numero`='$numer' AND `daterendu`='0000-00-00'";
+        $strempr="SELECT `trigramme` FROM `emprunts` WHERE `codelettres`='".$code."' AND `numero`='".$numer."' AND `daterendu`='0000-00-00'";
         $querempr=mysql_query($strempr);
 		if (mysql_num_rows($querempr)!=0) {
 			$array2=mysql_fetch_assoc($querempr);
@@ -127,12 +127,6 @@
                           }
                           
                       } */
-                }
-                $nb=mysql_numrows($querempr);
-                if($nb==0){
-                       echo "<a href=\"mailto:dhc@frankiz.org\">demande d'emprunt</a>";
-
-
                 }
 
 
