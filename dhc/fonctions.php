@@ -15,23 +15,6 @@ function suppr_trig($trigramme){
         }
         else{
             echo "Il reste des emprunts : voulez-vous les supprimer ?";
-//            echo<<<END
-//                <form action="" method=post>
-//                <input checked="true" name="suppr" value="oui" type="radio" style="width:20px; border:none" />oui
-//                <input name="suppr" value="non" type="radio"  style="width:20px; border:none" />non
-//                <input type="submit" value="Valider"/>
-//                </br>
-//                </br>
-//END;
-//            if($_POST['suppr'] == 'oui'){
-//                $query4="DELETE FROM `dhc`.`clients` WHERE `clients`.`trigramme` = '".$trigramme."'";
-//                $query3="DELETE FROM `emprunts` WHERE `trigramme`='".$trigramme."'";
-//                mysql_query($query4);
-//                mysql_query($query3);
-//            }
-//            elseif($_POST['suppr'] == 'non'){
-//                echo "Suppression du client annulée";
-//            }
         }
         $result=mysql_query($query);
         return $result;

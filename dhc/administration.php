@@ -1,11 +1,18 @@
     <SCRIPT language=javascript>
+       
    function ConfirmMessage() {
+       var u=false;
        if (confirm("Voulez vous supprimer l\'utilisateur ?")) { // Clic sur OK
-           document.write ('<a href="index.php" ></a>');
+           u=true;
            
        }
+       return u;
+       
+      
    }
+   
     </SCRIPT>
+
 
 <div id="formulaire" class="formulaire" style="height:200px;">
 	<h3>Traiter Client</h3><hr size="2" style="margin-bottom:20px; margin-top:0px; padding:0px; size:1px; height:1px; border-top:none; border-width:1px; border-color:#FFFFFF"/>
@@ -29,10 +36,29 @@
 
 <?php
 
+        if(isset($_POST['supprimer']) && $_POST['supprimer']=="supprimer"){
+            $valeurphp = "<script language='Javascript'> if(ConfirmMessage()){document.write(\"tos\");}
+        else{document.write(\"\");} </script>";
+            echo $valeurphp."<br/>";
+            echo is_null($valeurphp);
+            echo "ta gueule";
+            echo is_string($valeurphp);
+           }
+
+
+         if($valeurphp==="tos"){
+            echo "va te faire foutre <br/>";
+            $trigramme=$_POST['trigramme'];
+            //suppr_trig($trigramme);
+        }
+        
+
+
 if(isset($_POST["trigramme"]) && $_POST['trigramme']!=""){
     $trigramme=$_POST["trigramme"];
     $string="SELECT * FROM `clients` WHERE `trigramme`='$trigramme'";
     $query=mysql_query($string);
+    $nres=mysql_numrows($query);
     $tab = mysql_fetch_assoc($query);
         $nom=$tab['nom'];
         $prenom=$tab['prenom'];
@@ -46,41 +72,42 @@ if(isset($_POST["trigramme"]) && $_POST['trigramme']!=""){
         $caution=$tab['caution'];
     
     
-
-        if($_GET['u']){
-        $trigramme=$_POST['trigramme'];
-        suppr_trig($trigramme);
-    }
-
-    //if($nom!=""){
-    //affichage de l emprunteur
-    echo '<div id="headresultats"><h3 style="padding-left:10px">'.$nombre.' Traiter Client</h3>';
-    echo '</div>';
-    echo '<div id="bodyresultats">';
-    echo '<table border="0" style="margin:20px; margin-bottom:5px">
-    <tr>
-    <h3>'.$nom." ".$prenom.'</h3>'.      //affichage de l'emprunteur
-    '<h3>'.$remarque.'</h3>'.
-    '<h3>'.$tel.'</h3>'.
-    '<h3>'.$nbmax.'</h3>'.
-    '<h3>'.$kzert.'</h3>'.
-    '<h3>'.$remarques.'</h3>'.
-    "<h3><a href=\"mailto:".$mail."\">email</a></h3>";
+    if($nres!=0){
 
 
-;
+
+        //affichage de l emprunteur
+        echo '<div id="headresultats"><h3 style="padding-left:10px">'.$nombre.' Traiter Client</h3>';
+        echo '</div>';
+        echo '<div id="bodyresultats">';
+        echo '<table border="0" style="margin:20px; margin-bottom:5px">
+        <tr>
+        <h3>'.$nom." ".$prenom.'</h3>'.      //affichage de l'emprunteur
+        '<h3>'.$remarque.'</h3>'.
+        '<h3>'.$tel.'</h3>'.
+        '<h3>'.$nbmax.'</h3>'.
+        '<h3>'.$kzert.'</h3>'.
+        '<h3>'.$remarques.'</h3>'.
+        "<h3><a href=\"mailto:".$mail."\">email</a></h3>";
+
+
+
+
+
+
+
+
+
     ?>
     <form method="post" action="">
 
         <input type="hidden" name="trigramme" value="<?php if(isset($_POST['trigramme'])){echo $_POST['trigramme'];}?>"/>
-        <input type="submit" value="Supprimer" onClick="ConfirmMessage()"/>
+        <input type="hidden" name="supprimer" value="supprimer"/>
+        <input type="submit" value="Supprimer" />
     </form>
 
     <?php
-    echo $_GET['u'];
-    
-
-    
+  
 
     if($cotis=="non"){
         echo "<h3>Cotisation non payee</h3>";
@@ -130,7 +157,7 @@ if(isset($_POST["trigramme"]) && $_POST['trigramme']!=""){
 </div>
 
 <?php
-    //}
+}
 }
     //ajout d'emprunts;
     if(isset($_POST['codelettres']) && $_POST['codelettres']!=""
