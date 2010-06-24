@@ -8,16 +8,22 @@ function suppr_trig($trigramme){
 //    if(ConfirmMessage()){
         $query="SELECT * FROM `emprunts` WHERE `trigramme` = '".$trigramme."' AND `daterendu`=0000-00-00";
         $res=mysql_query($query);
-        if(mysql_numrows($res) == 0){
-            $query2="DELETE FROM `dhc`.`clients` WHERE `clients`.`trigramme` = '".$trigramme."'";
-            mysql_query($query2);
-            echo "Client supprimé";
+        $query3="SELECT * FROM `clients` WHERE `trigramme` = '".$trigramme."'";
+        $res3=mysql_query($query3);
+        if(mysql_numrows($res3)>0){
+            if(mysql_numrows($res) == 0){
+                $query2="DELETE FROM `dhc`.`clients` WHERE `clients`.`trigramme` = '".$trigramme."'";
+                mysql_query($query2);
+                return "Client supprimé";
+            }
+            else{
+                return "Il reste des emprunts: on ne peut pas supprimer cet utilisateur";
+            }
         }
         else{
-            echo "Il reste des emprunts : voulez-vous les supprimer ?";
+            
         }
-        $result=mysql_query($query);
-        return $result;
+
     }
 //}
 

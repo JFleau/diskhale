@@ -28,6 +28,8 @@ var j='0';
 var javt= new Array();
 </script>
 
+<div id="infos">
+
 
 <?php
 $date=mysql_query("SELECT TO_DAYS(CURRENT_DATE())");
@@ -90,20 +92,25 @@ FROM `emprunts` WHERE `trigramme`='$cle' AND `daterendu`=0000-00-00";
 
 ?>
 
-    
 
-    <div class="zoneTexteAfficherMasquer">
+
+    <div id="infos" class="zoneTexteAfficherMasquer" style="font-size:20pt">
         
         <script>
-        var nom="<?php echo $prenom." ".$nom." ".$categorie." ".$cle; ?>";
+        var nom="<?php echo $prenom." ".$nom; ?>";
         javt[j]=nom;
         j++;
         </script>
 
             
 	    <span class="inviteClic"></span>
-	    <div class="TexteAAfficher" style="text-align:center;font-size: large">
-            
+	    <div class="TexteAAfficher" style="text-align:center;">
+                    <table>
+                    <colgroup>
+                    <col>
+                    <col width="" span="">
+                    </colgroup>
+                    
 
 
 
@@ -124,13 +131,14 @@ FROM `emprunts` WHERE `trigramme`='$cle' AND `daterendu`=0000-00-00";
         $nbreretard++;
 ?>
 
+                      <tr>
+                        <td><?php echo $cat;?></td>
+                        <td><?php echo $code;?></td>
+                        <td><?php echo $numcode;?></td>
+                        <td><?php echo $retard;?></td>
+                      </tr>
 
-                <p><?php echo $cat;?></p>
-                <p><?php echo $code;?></p>
-                <p><?php echo $numcode;?></p>
-                <p><?php echo $retard;?></p>
-                <p><?php echo $nom." ".$prenom;?></p>
-                <br/>
+
          
 
 
@@ -140,9 +148,26 @@ FROM `emprunts` WHERE `trigramme`='$cle' AND `daterendu`=0000-00-00";
     }
 
 ?>
-               <p><?php echo "plus grand retard = ".$retardmax;?></p>
-               <p><?php echo "nombre de retard = ".$nbreretard;?></p>
-               <p><?php echo"<a href=\"mailto:".$mail."\">email</a>"; ?></p>
+                    
+               </table>
+                
+               <table>
+                   <tr>
+                       <td><?php echo $cle; ?></td>
+                   </tr>
+                   <tr>
+                       <td><?php echo $categorie; ?></td>
+                   </tr>
+                   <tr>
+                       <td><?php echo "plus grand retard = ".$retardmax;?></td>
+                   </tr>
+                   <tr>
+                       <td><?php echo "nombre de retard = ".$nbreretard;?></td>
+                   </tr>
+                   <tr>
+                       <td><?php echo"<a href=\"mailto:".$mail."\">email</a>"; ?></td>
+                   </tr>
+               </table>
          </div>
 	</div>
 
@@ -150,3 +175,4 @@ FROM `emprunts` WHERE `trigramme`='$cle' AND `daterendu`=0000-00-00";
 }
 ?>
 
+</div>
