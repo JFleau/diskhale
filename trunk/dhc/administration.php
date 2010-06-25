@@ -16,15 +16,11 @@
 -->
 <?php
 
-
-                $tri=$_POST['trig'];
-                $trig2=$_POST['trigramme2'];
-                modifier($tri);
-//                if(isset($_POST['trigramme2']) && $_POST['trigramme2']!="exemple:DHC" && $ret=="OK" ){
-//                    $_POST['trigramme']=$trig2;
-//                }
-//                elseif(isset($_POST['trig']) && $_POST['trig']!="exemple:DHC") $_POST['trigramme']=$tri;
-              
+                if(isset($_POST['trig']) && $_POST['trig']!=""){
+                    $tri=$_POST['trig'];
+                    modifier($tri);
+                }
+       
 ?>
 
 
@@ -514,6 +510,7 @@ if(isset($_POST["trigramme"]) && $_POST['trigramme']!=""){
 
 //affichage des disques empruntés.
 
+if(isset($_POST["trigramme"]) && $_POST['trigramme']!=""){
 $string2="SELECT * FROM `emprunts` WHERE `trigramme`='$trigramme' AND `daterendu`=0000-00-00 ";
     $query2=mysql_query($string2);
     while($tab2 = mysql_fetch_assoc($query2)){
@@ -570,14 +567,12 @@ $string2="SELECT * FROM `emprunts` WHERE `trigramme`='$trigramme' AND `daterendu
 
         <?php
         }
+    }
 
-        ?>
-         
 
-        
-   <?php
 
 }
+
 //echo $_POST['trigramme'];
 ?>
 </table>
