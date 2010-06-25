@@ -53,7 +53,7 @@ return $authorized;
 }
 
 function connect(){
-mysql_connect("localhost", "root", "root") or die("Erreur de connexion � MySQL");
+mysql_connect("localhost", "root", "2uh5ZpjB7CsceR3w") or die("Erreur de connexion � MySQL");
 mysql_select_db("dhc") or die("Erreur de connexion � la base de donn�es");
 mysql_query("SET NAMES UTF8");
 }
@@ -221,7 +221,7 @@ function inscription(){
                 if($res==0){
                     $quer ="INSERT INTO `clients` (`trigramme`, `nom`, `prenom`,`password`,`categorie`,
                     `nbmax`,`remarques`,`email`, `kazert`,`telephone`, `statut`, `cotisation`,`caution`)
-                    VALUES('".$trigramme."', '".$nom."', '".$prenom."','".$mdp1."','".$categorie."',
+                    VALUES('".$trigramme."', '".addslashes($nom)."', '".addslashes($prenom)."','".$mdp1."','".$categorie."',
                     '5','".$remarques."','".$email."', '".$kzert."','".$numero."', '".$statut."', '".$cotisation."','".$caution."')";
                     if (!mysql_query($quer)) echo 'Erreur SQL '.mysql_error().': '.$quer;
                     else {
@@ -355,7 +355,7 @@ function modifier($trigramme){
                                         echo "le champ kzert doit contenir un entier";
                                     }
                                     else{
-                                        $query="UPDATE `clients` SET `$cle`='$val' WHERE `trigramme`='$trigramme'";
+                                        $query="UPDATE `clients` SET `".$cle."`='".$val."' WHERE `trigramme`='".$trigramme."'";
                                         if (!mysql_query($query)) echo 'Erreur SQL '.mysql_error().': '.$query;
                                         
                                     }
@@ -369,7 +369,7 @@ function modifier($trigramme){
                                         echo "le champ telephone doit contenir un entier";
                                     }
                                     else{
-                                        $query="UPDATE `clients` SET `$cle`='$val' WHERE `trigramme`='$trigramme'";
+                                        $query="UPDATE `clients` SET `".$cle."`='".$val."' WHERE `trigramme`='".$trigramme."'";
                                         if (!mysql_query($query)) echo 'Erreur SQL '.mysql_error().': '.$query;
                                         
                                     }
@@ -377,7 +377,7 @@ function modifier($trigramme){
 
                             }
                             else{
-                                $query="UPDATE `clients` SET `$cle`='$val' WHERE `trigramme`='$trigramme'";
+                                $query="UPDATE `clients` SET `".$cle."`='".addslashes($val)."' WHERE `trigramme`='".$trigramme."'";
                                 if (!mysql_query($query)) echo 'Erreur SQL '.mysql_error().': '.$query;
                                 
                             }
