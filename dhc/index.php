@@ -97,13 +97,13 @@
 <script type="text/javascript">
 <!--
 	jQuery().ready(function() {
-		$(".cache").next("div").hide();
+		$(".byebye").hide();
 		$(".cache").click(function() {
-		if ($(".cache").next("div").is(":hidden")) {
+		if ($(this).next("div").is(":hidden")) {
+				$(".cache").next("div").slideUp();
 				$(this).next("div").slideDown();
 		}
-		else {				
-				$(this).next("div").slideUp();
+		else {
 		}
 		});
 	});
