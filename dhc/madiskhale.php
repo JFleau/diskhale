@@ -36,7 +36,7 @@
     <form action="" method="post">
     <table border="0" style="text-align:right; vertical-align:middle" cellpadding="0">
     <tr>
-    <td width="250" colspan="3">Ancien mot de passe</td>
+    <td width="250" colspan="3">Mot de passe</td>
     <td width=""><input type="password" name="oldpassword" value="" /></td>
     </tr>
     <tr>
