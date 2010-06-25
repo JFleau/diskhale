@@ -40,11 +40,11 @@
     <td width=""><input type="password" name="oldpassword" value="" /></td>
     </tr>
     <tr>
-    <td colspan="3">Nouveau mot de passe</td>
+    <td colspan="3" style="font-weight:normal">Nouveau mot de passe (facultatif)</td>
     <td><input type="password" name="password" /></td>
     </tr>
     <tr>
-    <td colspan="3">Confirmer le nouveau mot de passe</td>
+    <td colspan="3" style="font-weight:normal">Confirmer le nouveau mot de passe (facultatif)</td>
     <td><input type="password" name="password2" /></td>
     </tr>
     
