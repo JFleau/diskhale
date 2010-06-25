@@ -1,6 +1,9 @@
-
-	<div id="formulaire" class="formulaire" >
-	<h3>VOS INFORMATIONS</h3><hr size="2" style="margin-bottom:20px; margin-top:0px; padding:0px; size:1px; height:1px; border-top:none; border-width:1px; border-color:#FFFFFF"/>
+	<div id="formulaire" class="formulaire" style="height:470px">
+	<div class="cache">
+    <h3 style="cursor:default">VOS INFORMATIONS</h3>
+    
+    <hr size="2" style="margin-bottom:20px; margin-top:0px; padding:0px; size:1px; height:1px; border-top:none; border-width:1px; border-color:#FFFFFF"/></div>
+    <div>
     <?php
     
                 $trigramme=$_SESSION['trigramme'];
@@ -21,27 +24,56 @@
     <tr><td style="color:#6c7551; text-align:right">Prénom :</td><td colspan="3"><?php echo $array['prenom']; ?></td></tr>
     <tr><td style="color:#6c7551; text-align:right">e-mail :</td><td style="font-weight:normal" colspan="3"><?php if($array['email']!="exemple: pierre.dupont")echo $array['email']; ?></td></tr>
     <tr><td height="10" colspan="3"></td><td></td></tr>
-    <tr><td style="color:#6c7551; text-align:right">Casert :</td><td style="font-weight:normal"><?php if($array['kazert']!="exemple: 691009") echo $array['kazert']; ?></td><td width="70" style="color:#6c7551; text-align:right">Téléphone :</td><td style="font-weight:normal"><?php if($array['telephone']!="exemple: 6419") echo $array['telephone']; ?></td></tr>
+    <tr><td style="color:#6c7551; text-align:right">Casert :</td><td style="font-weight:normal"><?php echo $array['kazert']; ?></td><td width="70" style="color:#6c7551; text-align:right">Téléphone :</td><td style="font-weight:normal"><?php echo $array['telephone']; ?></td></tr>
     </table>
     <p>Pour modifier ces informations ou supprimer votre compte, contactez un administrateur <a href="mailto:dhc@frankiz.polytechnique.fr">en cliquant ici</a>.</p>
-    <h3 style="cursor:default" class="cache">MODIFIER SON COMPTE</h3>
-    <div>
+    </div>
+    <div class="cache">
+    <h3 style="cursor:default">MODIFIER SON COMPTE</h3>
     <hr size="2" style="margin-bottom:20px; margin-top:0px; padding:0px; size:1px; height:1px; border-top:none; border-width:1px; border-color:#FFFFFF"/>
-    <form action="" method="post" class="formulaire">
-    <table border="0" cellpadding="0" width="340" style="text-align:right">
-        <tr><td>Mot de passe</td><td><input type="password" name="oldpassword" /></td></tr>
-        <tr><td>Trigramme souhaite</td><td><input type="text" name="trigramme2" value="<?php if(isset($_POST["trigramme2"])){ echo $_POST["trigramme2"];} else {echo 'exemple: DHC';}?>" onFocus="this.value=verify(this,'exemple: DHC');" onblur="this.value=verify(this,'exemple: DHC');" /></td></tr>
-	<tr><td>Nouveau mot de passe</td><td><input type="password" name="password" /></td></tr>
-	<tr><td>Confirmez le mot de passe</td><td><input type="password" name="password2" /></td></tr>
-        <tr><td>Nom</td><td><input type="text" name="nom" value="<?php if(isset($_POST["nom"])){ echo $_POST["nom"];} ?>"/></td></tr>
-        <tr><td>Prenom</td><td><input type="text" name="prenom" value="<?php if(isset($_POST["prenom"])){ echo $_POST["prenom"];} ?>" /></td></tr>
-        <tr><td>Kazert</td><td><input type="text" name="kazert" value="<?php if(isset($_POST["kazert"])){ echo $_POST["kazert"];} else{ echo 'exemple: 691009';} ?>" onFocus="this.value=verify(this,'exemple: 691009');" onblur="this.value=verify(this,'exemple: 691009');"  /></td></tr>
-        <tr><td>E-mail</td><td><input type="text" name="email" value="<?php if(isset($_POST["email"])){ echo $_POST["email"];} else {echo "exemple: pierre.dupont";}?>" onFocus="this.value=verify(this,'exemple: pierre.dupont');" onblur="this.value=verify(this,'exemple: pierre.dupont');" />
-                                <select name="ecole" style="margin-right:3px; width:150px;">
-                                    <option value="polytechnique.edu">@polytechnique.edu</option>
-                                    <option value="institutoptique.fr">@institutoptique.fr</option>
-                                </select></td></tr>
-
+    </div>
+    <div class="byebye">
+    <form action="" method="post">
+    <table border="0" style="text-align:right; vertical-align:middle" cellpadding="0">
+    <tr>
+    <td width="250" colspan="3">Ancien mot de passe</td>
+    <td width=""><input type="password" name="oldpassword" value="" /></td>
+    </tr>
+    <tr>
+    <td colspan="3">Nouveau mot de passe</td>
+    <td><input type="password" name="password" /></td>
+    </tr>
+    <tr>
+    <td colspan="3">Confirmer le nouveau mot de passe</td>
+    <td><input type="password" name="password2" /></td>
+    </tr>
+    
+    <tr><td height="20" colspan="3"></td><td></td></tr>
+    
+    <tr>
+    <td>Nom</td>
+    <td><input type="text" name="nom" value="<?php echo $array['nom']; ?>" /></td>
+    <td>Prénom</td>
+    <td><input type="text" name="prenom" value="<?php echo $array['prenom']; ?>" /></td>
+    </tr>
+    <tr>
+    <td>Casert</td>
+    <td><input type="text" name="kzert" value="<?php echo $array['kazert']; ?>" /></td>
+    <td>Téléphone</td>
+    <td><input type="text" name="tel" value="<?php echo $array['telephone']; ?>" /></td>
+    </tr>
+    
+    <tr><td height="20" colspan="3"></td><td></td></tr>
+    
+    <tr>
+    <td>e-mail</td>
+    <td colspan="3" style="font-weight:normal; text-align:left">
+    <input type="text" name="mail" style="width:397px;" value="<?php echo $array['email']; ?>" />
+    </td>
+    </tr>
+        
+    <tr><td height="20" colspan="3"></td><td></td></tr>
+    
     <tr>
     <td colspan="2">Catégorie préférée</td>
     <td colspan="2">
@@ -58,25 +90,26 @@
          <option value="tradi">Musiques traditionnelles</option>
          <option value="electro">Electromusique</option>
          <option value="mili">Musique militaire</option>
-         <option value="part">Partitions</option>
+         <option value="part">Partitions</option>        
     </select>
     </td>
     </tr>
-
     <tr>
     <td colspan="4">Recevoir la newsletter de cette catégorie :
-    <input checked="true" name="statut" value="oui" type="radio" style="width:20px; border:none" />oui
+    <input checked="true" name="news" value="oui" type="radio" style="width:20px; border:none" />oui 
     <input name="news" value="non" type="radio"  style="width:20px; border:none" />non
     <input type="hidden" name="action" value="modifier" /></td>
     </tr>
-
-    <tr><td height="10" ></td><td></td></tr>
-    <tr><td colspan="2"><input type="submit" value="Changer" style="width:80px" /></td></tr>
-    </table>
-    </form>
+    <tr><td height="20" colspan="3"></td><td></td></tr>
+	</table>
+    <div align="right"><input type="submit" value="Enregistrer les modifications" style="width:200px; margin-bottom:20px; margin-right:10px;" /></div>
+	</form>
     </div>
     </div>
-
+    <div id="infos2" style="float:right; clear:right; height:200px; width:467px; text-align:left;">
+    <h3>COMMENT RENDRE ?</h3>
+    <p>Pour rendre un disque, il vous suffit de vous rendre à la diskhâle pendant les horaires d'ouverture, ou bien de glisser le disque dans la boîte aux lettres d'un membre du binet.</p>
+    </div>
 
     <div id="infos" style="">
     <h3>VOS EMPRUNTS</h3>
