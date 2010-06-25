@@ -1,24 +1,24 @@
-	<div id="formulaire" class="formulaire" style="height:470px">
-	<div class="cache">
+     <div id="formulaire" class="formulaire" style="height:470px">
+        <div class="cache">
     <h3 style="cursor:default">VOS INFORMATIONS</h3>
-    
+
     <hr size="2" style="margin-bottom:20px; margin-top:0px; padding:0px; size:1px; height:1px; border-top:none; border-width:1px; border-color:#FFFFFF"/></div>
     <div>
     <?php
-    
+
                 $trigramme=$_SESSION['trigramme'];
                 modifier($trigramme);
 
 
-		$query="SELECT `nom`,`prenom`,`email`,`kazert`,`telephone`,`nbmax` FROM `clients` WHERE `trigramme`='".$_SESSION['trigramme']."'";
-		$result=mysql_query($query);
-		$array=mysql_fetch_assoc($result);
-	?>
+                $query="SELECT `nom`,`prenom`,`email`,`kazert`,`telephone`,`nbmax` FROM `clients` WHERE `trigramme`='".$_SESSION['trigramme']."'";
+                $result=mysql_query($query);
+                $array=mysql_fetch_assoc($result);
+        ?>
     <?php
-		$query2="SELECT `codelettres`,`numero`,`categorie` FROM `emprunts` WHERE `trigramme`='".$_SESSION['trigramme']."' AND `daterendu`='0000-00-00'";
-		$result2=mysql_query($query2);
-		$nombre=mysql_num_rows($result2);
-	?>
+                $query2="SELECT `codelettres`,`numero`,`categorie` FROM `emprunts` WHERE `trigramme`='".$_SESSION['trigramme']."' AND `daterendu`='0000-00-00'";
+                $result2=mysql_query($query2);
+                $nombre=mysql_num_rows($result2);
+        ?>
     <table border="0" cellpadding="0" width="390">
     <tr><td width="70" style="color:#6c7551; text-align:right">Nom :</td><td colspan="3"><?php echo $array['nom']; ?></td></tr>
     <tr><td style="color:#6c7551; text-align:right">Prénom :</td><td colspan="3"><?php echo $array['prenom']; ?></td></tr>
@@ -47,9 +47,9 @@
     <td colspan="3" style="font-weight:normal">Confirmer le nouveau mot de passe (facultatif)</td>
     <td><input type="password" name="password2" /></td>
     </tr>
-    
+
     <tr><td height="20" colspan="3"></td><td></td></tr>
-    
+
     <tr>
     <td>Nom</td>
     <td><input type="text" name="nom" value="<?php echo $array['nom']; ?>" /></td>
@@ -62,18 +62,18 @@
     <td>Téléphone</td>
     <td><input type="text" name="telephone" value="<?php echo $array['telephone']; ?>" /></td>
     </tr>
-    
+
     <tr><td height="20" colspan="3"></td><td></td></tr>
-    
+
     <tr>
     <td>e-mail</td>
     <td colspan="3" style="font-weight:normal; text-align:left">
     <input type="text" name="email" style="width:397px;" value="<?php echo $array['email']; ?>" />
     </td>
     </tr>
-        
+
     <tr><td height="20" colspan="3"></td><td></td></tr>
-    
+
     <tr>
     <td colspan="2">Catégorie préférée</td>
     <td colspan="2">
@@ -90,20 +90,20 @@
          <option value="tradi">Musiques traditionnelles</option>
          <option value="electro">Electromusique</option>
          <option value="mili">Musique militaire</option>
-         <option value="part">Partitions</option>        
+         <option value="part">Partitions</option>
     </select>
     </td>
     </tr>
     <tr>
     <td colspan="4">Recevoir la newsletter de cette catégorie :
-    <input checked="true" name="news" value="oui" type="radio" style="width:20px; border:none" />oui 
+    <input checked="true" name="news" value="oui" type="radio" style="width:20px; border:none" />oui
     <input name="news" value="non" type="radio"  style="width:20px; border:none" />non
     <input type="hidden" name="action" value="modifier" /></td>
     </tr>
     <tr><td height="20" colspan="3"></td><td></td></tr>
-	</table>
+        </table>
     <div align="right"><input type="submit" value="Enregistrer les modifications" style="width:200px; margin-bottom:20px; margin-right:10px;" /></div>
-	</form>
+        </form>
     </div>
     </div>
     <div id="infos2" style="float:right; clear:right; height:200px; width:467px; text-align:left;">
