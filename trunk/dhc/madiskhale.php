@@ -58,9 +58,9 @@
     </tr>
     <tr>
     <td>Casert</td>
-    <td><input type="text" name="kzert" value="<?php echo $array['kazert']; ?>" /></td>
+    <td><input type="text" name="kazert" value="<?php echo $array['kazert']; ?>" /></td>
     <td>Téléphone</td>
-    <td><input type="text" name="tel" value="<?php echo $array['telephone']; ?>" /></td>
+    <td><input type="text" name="telephone" value="<?php echo $array['telephone']; ?>" /></td>
     </tr>
     
     <tr><td height="20" colspan="3"></td><td></td></tr>
@@ -68,7 +68,7 @@
     <tr>
     <td>e-mail</td>
     <td colspan="3" style="font-weight:normal; text-align:left">
-    <input type="text" name="mail" style="width:397px;" value="<?php echo $array['email']; ?>" />
+    <input type="text" name="email" style="width:397px;" value="<?php echo $array['email']; ?>" />
     </td>
     </tr>
         
