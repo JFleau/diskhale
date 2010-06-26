@@ -19,23 +19,27 @@
 	
 	if (isset($_POST['action'])) {
 		if ($_POST['action']=="inscription") {
-    	$message=inscription();
+    		$message=inscription();
 		}
 	
-	if ($_POST['action']=="emprunter") {
-		if ($_SESSION['loggedIn']==1) {
-			$trigramme=$_SESSION['trigramme'];
-			$message=emprunter($trigramme);
+		if ($_POST['action']=="emprunter") {
+			if ($_SESSION['loggedIn']==1) {
+				$trigramme=$_SESSION['trigramme'];
+				$message=emprunter($trigramme);
 
+			}
+			if ($_SESSION['loggedIn']==2) {
+				$trigramme=$_POST['trigramme'];
+				$query="SELECT * FROM `clients` WHERE `trigramme`='".$_POST['trigramme']."'";
+				$result=mysql_query($query);
+				$num=mysql_num_rows($result);
+				if ($num!=1) $message="Trigramme inconnu."; else $message=emprunter($trigramme);
+			}
 		}
-		if ($_SESSION['loggedIn']==2) {
-			$trigramme=$_POST['trigramme'];
-			$query="SELECT * FROM `clients` WHERE `trigramme`='".$_POST['trigramme']."'";
-			$result=mysql_query($query);
-			$num=mysql_num_rows($result);
-			if ($num!=1) $message="Trigramme inconnu."; else $message=emprunter($trigramme);
+	
+		if ($_POST['action']=="modifier") {
+			$message=modifier($_SESSION['trigramme']);
 		}
-	}
 	}
     
 	if (!isset($_GET['page'])) {
@@ -121,7 +125,7 @@
     <?php   
     	if (isset($message)) {
 			if ($message!="") {
-				if ($message=="Vous êtes désormais inscrits à la diskhâle classique."||$message=="Emprunt effectué avec succès.") echo '<div id="message" style="background-color:#46D249; color:#003300; border-bottom-color:#003300;"><img src="images/OK.png" style="vertical-align:middle">&nbsp;&nbsp;'.$message.'</div>';
+				if ($message=="Vous êtes désormais inscrits à la diskhâle classique."||$message=="Emprunt effectué avec succès."||$message=="Modifications effectuées avec succès."||$message=="Mot de passe modifié avec succès.") echo '<div id="message" style="background-color:#46D249; color:#003300; border-bottom-color:#003300;"><img src="images/OK.png" style="vertical-align:middle">&nbsp;&nbsp;'.$message.'</div>';
 				else echo '<div id="message" style="background-color:#DE7A7A; color:#990000; border-bottom-color:#990000;"><img src="images/Wrong.png" style="vertical-align:middle">&nbsp;&nbsp;'.$message.'</div>';
 			}
 		}

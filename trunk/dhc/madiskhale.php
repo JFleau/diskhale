@@ -15,7 +15,7 @@
                 $array=mysql_fetch_assoc($result);
         ?>
     <?php
-                $query2="SELECT `codelettres`,`numero`,`categorie` FROM `emprunts` WHERE `trigramme`='".$_SESSION['trigramme']."' AND `daterendu`='0000-00-00'";
+                $query2="SELECT `codelettres`,`numero`,`categorie`,`dateemprunt` FROM `emprunts` WHERE `trigramme`='".$_SESSION['trigramme']."' AND `daterendu`='0000-00-00'";
                 $result2=mysql_query($query2);
                 $nombre=mysql_num_rows($result2);
         ?>
@@ -26,7 +26,7 @@
     <tr><td height="10" colspan="3"></td><td></td></tr>
     <tr><td style="color:#6c7551; text-align:right">Casert :</td><td style="font-weight:normal"><?php echo $array['kazert']; ?></td><td width="70" style="color:#6c7551; text-align:right">Téléphone :</td><td style="font-weight:normal"><?php echo $array['telephone']; ?></td></tr>
     </table>
-    <p>Pour modifier ces informations ou supprimer votre compte, contactez un administrateur <a href="mailto:dhc@frankiz.polytechnique.fr">en cliquant ici</a>.</p>
+    <p>Pour supprimer votre compte, contactez un administrateur <a href="mailto:dhc@frankiz.polytechnique.fr">en cliquant ici</a>.</p>
     </div>
     <div class="cache">
     <h3 style="cursor:default">MODIFIER SON COMPTE</h3>
@@ -106,9 +106,10 @@
         </form>
     </div>
     </div>
-    <div id="infos2" style="float:right; clear:right; height:200px; width:467px; text-align:left;">
+    <div id="infos2" style="float:right; clear:right; height:190px; width:467px; text-align:left;">
     <h3>COMMENT RENDRE ?</h3>
     <p>Pour rendre un disque, il vous suffit de vous rendre à la diskhâle pendant les horaires d'ouverture, ou bien de glisser le disque dans la boîte aux lettres d'un membre du binet.</p>
+    <p>Une fois le disque réceptionné, il sera indiqué au plus vite comme rendu dans la base et il vous sera possible d'emprunter d'autres disques.</p>
     </div>
 
     <div id="infos" style="">
@@ -125,9 +126,17 @@
                                 $query3="SELECT `oeuvres`,`compositeurs`,`categorie`,`codelettres`,`numero` FROM `disques` WHERE `codelettres`='".$array2['codelettres']."' AND `numero`='".$array2['numero']."' AND `categorie`='".$array2['categorie']."'";
                                 $result3=mysql_query($query3);
                                 $array3=mysql_fetch_assoc($result3);
-
-                        echo    '<div id="disques">
-                                                <b>'.$array3["oeuvres"].'</b><br />'.$array3["compositeurs"].'<br /><font color="#cccccc">'.$array3["categorie"].' | '.$array3["codelettres"].' | '.$array3["numero"].'</font><br /><br style="line-height:10px;" /><font color="#ffffff">Emprunté le : 19-06-2010</font>
+								
+						$datequery="SELECT DATEDIFF(CURDATE(), `dateemprunt`) FROM `emprunts` WHERE `trigramme`='".$_SESSION['trigramme']."' AND `codelettres`='".$array2['codelettres']."' AND `numero`='".$array2['numero']."' AND `categorie`='".$array2['categorie']."'";
+						$dateresult=mysql_query($datequery);
+						$datearray=mysql_fetch_array($dateresult);
+						$delai=$datearray[0];
+                        if ($delai>4) echo '<div id="disques2">'; else echo '<div id="disques">';
+                        echo ' <b>'.$array3["oeuvres"].'</b><br />'.$array3["compositeurs"].'<br /><font color="#cccccc">'.$array3["categorie"].' | '.$array3["codelettres"].' | '.$array3["numero"].'</font><br /><br style="line-height:10px;" /><font color="#ffffff">Emprunté le : '.$array2["dateemprunt"];
+						
+						if ($delai>4) echo ' &nbsp; :: &nbsp; <b>Retard : '.($delai-4).' jours !</b>';
+						
+						echo '</font>
                                         </div>';
                         }
 
@@ -138,5 +147,4 @@
                                 }
 
         ?>
-
-
+		<div id="infos" style="height:30px;margin-top:2px;">&shy;</div>

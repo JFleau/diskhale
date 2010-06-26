@@ -156,7 +156,7 @@ if($_SESSION['loggedIn']==2){
 		echo '<div id="headresultats"><h3 style="padding-left:10px">+ de 100 RESULTATS. Veuillez préciser vos critères de recherche.</h3></div>';
 		}
 		else {
-		$totalpages=floor($nombre/5)+1;
+		$totalpages=ceil($nombre/5);
 		echo '<div id="headresultats"><h3 style="padding-left:10px">'.$nombre.' RESULTAT';if ($nombre>1) echo 'S';if ($nombre!=0) echo ' sur '.$totalpages.' PAGE';if ($totalpages>1) echo 'S';echo '</h3></div>'; 
 		if ($nombre!=0) {
 		echo '<div id="bodyresultats">';
