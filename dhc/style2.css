@@ -172,23 +172,7 @@ background-color:#ffffff;
 
 }
 
-#infos td
-{
-padding:5px;
-padding-left:15px;
-padding-right:10px;
-border-left-color:#4682b4;
-border-left-style:solid;
-border-left-width:6px;
 
-background-color:#4682b4;
-margin:00px;
-font-family: Tahoma, Helvetica, Arial,  Sans-Serif;
-font-size: 11px;
-color: #ffffff;
-text-align:justify;
-line-height:17px;
-}
 
 #disques
 {

@@ -38,8 +38,41 @@
 		}
 	
 		if ($_POST['action']=="modifier") {
-			$message=modifier($_SESSION['trigramme']);
+			if ($_SESSION['loggedIn']==1) $message=modifier($_SESSION['trigramme']);
+			if ($_SESSION['loggedIn']==2) $message=modifier($_POST['trigramme']);
 		}
+		
+		if ($_POST['action']=="delete"&&$_SESSION['loggedIn']==2) {
+				if ($_POST['nombre']!=0) $message="Suppression impossible. Des emprunts sont en cours.";
+				else {
+					$query="DELETE FROM `clients` WHERE `trigramme`='".$_POST['trigramme']."'";
+					if (!mysql_query($query)) $message='Erreur SQL '.mysql_error().': '.$query;
+					else $message="Suppression réussie.";
+				}
+		}
+		if ($_POST['action']=="rendre") {
+				$query="UPDATE `emprunts` SET `daterendu`=CURDATE() WHERE `codelettres`='".$_POST['codelettres']."' AND `numero`='".$_POST['numero']."' AND `daterendu`='0000-00-00'";
+				$result=mysql_query($query);
+				if (!mysql_query($query)) $message='Erreur SQL '.mysql_error().': '.$query;
+				else $message="Le disque a été rendu.";
+		}
+		if ($_POST['action']=="ajout_disque") {
+				$query="INSERT INTO `disques` (`codelettres`, `numero`, `compositeurs`, `interpretes`, `oeuvres`, `categorie`) VALUES ('".$_POST['codelettres']."', '".$_POST['numero']."', '".addslashes($_POST['artiste'])."', '".addslashes($_POST['interprete'])."', '".addslashes($_POST['oeuvre'])."', '".$_POST['categorie']."')";
+				$result=mysql_query($query);
+				$message="Disque ajouté avec succès.";
+		}
+				if ($_POST['action']=="modif_disque") {
+				$query1="UPDATE `disques` SET `compositeurs`='".addslashes($_POST['artiste'])."' WHERE `codelettres`='".$_POST['codelettres']."' AND `numero` = '".$_POST['numero']."' ";
+				$result1=mysql_query($query1);
+				$query2="UPDATE `disques` SET `interpretes`='".addslashes($_POST['interprete'])."' WHERE `codelettres`='".$_POST['codelettres']."' AND `numero` = '".$_POST['numero']."' ";
+				$result2=mysql_query($query2);
+				$query3="UPDATE `disques` SET `oeuvres`='".addslashes($_POST['oeuvre'])."' WHERE `codelettres`='".$_POST['codelettres']."' AND `numero` = '".$_POST['numero']."' ";
+				$result3=mysql_query($query3);
+				$query4="UPDATE `disques` SET `categorie` = '".$_POST['categorie']."' WHERE `codelettres`='".$_POST['codelettres']."' AND `numero` = '".$_POST['numero']."' ";
+				$result4=mysql_query($query4);
+				$message="Disque modifié avec succès.";
+		}
+
 	}
     
 	if (!isset($_GET['page'])) {
@@ -56,7 +89,7 @@
 				}
 		}
 	include "pages.php";
-	?>
+?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -125,7 +158,7 @@
     <?php   
     	if (isset($message)) {
 			if ($message!="") {
-				if ($message=="Vous êtes désormais inscrits à la diskhâle classique."||$message=="Emprunt effectué avec succès."||$message=="Modifications effectuées avec succès."||$message=="Mot de passe modifié avec succès.") echo '<div id="message" style="background-color:#46D249; color:#003300; border-bottom-color:#003300;"><img src="images/OK.png" style="vertical-align:middle">&nbsp;&nbsp;'.$message.'</div>';
+				if ($message=="Vous êtes désormais inscrits à la diskhâle classique."||$message=="Emprunt effectué avec succès."||$message=="Modifications effectuées avec succès."||$message=="Mot de passe modifié avec succès."||$message=="Suppression réussie."||$message=="Le disque a été rendu."||$message=="Disque ajouté avec succès."||$message="Disque modifié avec succès.") echo '<div id="message" style="background-color:#46D249; color:#003300; border-bottom-color:#003300;"><img src="images/OK.png" style="vertical-align:middle">&nbsp;&nbsp;'.$message.'</div>';
 				else echo '<div id="message" style="background-color:#DE7A7A; color:#990000; border-bottom-color:#990000;"><img src="images/Wrong.png" style="vertical-align:middle">&nbsp;&nbsp;'.$message.'</div>';
 			}
 		}

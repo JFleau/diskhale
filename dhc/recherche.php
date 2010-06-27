@@ -51,83 +51,7 @@
 
 	<div align="right"><input type="hidden" name="action" value="firstrecherche" /><input type="reset" value="Annuler" style="margin-top:20px; margin-bottom:20px; margin-right:10px; width:auto"/><input type="submit" value="Lancer la recherche" style="margin-top:20px; margin-bottom:20px; margin-right:10px;"/></div>
     </form>
-   <?php if($_SESSION['loggedIn']!=2){echo "</div>";}?>
-
-
-<?php
-
-if($_SESSION['loggedIn']==2){
-
-?>
-
-
-<h3 style="cursor:default" class="cache">AJOUTER OU MODIFIER UN DISQUE</h3>
-    <div>
-    <hr size="2" style="margin-bottom:20px; margin-top:0px; padding:0px; size:1px; height:1px; border-top:none; border-width:1px; border-color:#FFFFFF"/>
-    <form>
-    <table border="0" style="text-align:right; vertical-align:middle" cellpadding="0" align="center">
-    <tr>
-    <td width="" colspan="3">Artiste/Compositeur</td>
-    <td width=""><input type="text" name="artiste_m" value="<?php if(isset($_POST["artiste_m"])) echo $_POST["artiste_m"];?>" /></td>
-    </tr>
-    <tr>
-    <td colspan="3">Oeuvre</td>
-    <td><input type="text" name="oeuvre_m" value="<?php if(isset($_POST["oeuvre_m"])) echo $_POST["oeuvre_m"];?>" /></td>
-    </tr>
-    <tr>
-    <td colspan="3">Interprète</td>
-    <td><input type="text" name="interprete_m" value="<?php if(isset($_POST["interprete_m"])) echo $_POST["interprete_m"];?>" /></td>
-    </tr>
-
-    <tr><td height="20" colspan="3"></td><td></td></tr>
-
-    <tr>
-    <td colspan="2">Catégorie</td>
-    <td colspan="2">
-    <select name="categorie_m" style="margin-right:3px; margin-left:2px; width:230px">
-         <option value="">-</option>
-         <option value="classique">Classique</option>
-         <option value="opera">Op&eacute;ra</option>
-         <option value="interprete">Interprète</option>
-         <option value="jazz">Jazz</option>
-         <option value="varietes">Vari&eacute;t&eacute;s</option>
-         <option value="film">Musique de film</option>
-         <option value="compil">Compilations</option>
-         <option value="anc">Musique ancienne + Liturgies</option>
-         <option value="tradi">Musiques traditionnelles</option>
-         <option value="electro">Electromusique</option>
-         <option value="mili">Musique militaire</option>
-         <option value="part">Partitions</option>
-    </select>
-    </td>
-    </tr>
-
-    <tr>
-    <td colspan="2">Code lettres</td>
-    <td><div align="left"><input type="text" name="code_m" style="width:55px;" value="" /></div></td>
-    <td>Numéro
-    <input type="text" name="numero_m" style="width:55px;" value="" /></td>
-    </tr>
-
-    <tr><td height="20" colspan="3"></td><td></td></tr>
-
-	</table>
-
-	<div align="right"><input type="hidden" name="action" value="firstrecherche" /><input type="reset" value="Annuler" style="margin-top:20px; margin-bottom:20px; margin-right:10px; width:auto"/><input type="submit" value="Valider" style="margin-top:20px; margin-bottom:20px; margin-right:10px;"/></div>
-    </form>
-    </div>
-    </div>
-
-    
-
-
-<?php
-}
-?>
-
-
-
-    
+	</div>    
     <div id="infos" style="height:310px;">
     <h3 style="color:#990000">COMMENT CHERCHER ?</h3>
     <p>Vous pouvez chercher dans la base de données en remplissant au-moins un des champs. Faire varier le nombre de champs remplis permet de gagner en précision ou au contraire en quantité de résultats.</p>
@@ -175,9 +99,9 @@ if($_SESSION['loggedIn']==2){
         $querempr=mysql_query($strempr);
 		if (mysql_num_rows($querempr)!=0) {
 			$array2=mysql_fetch_assoc($querempr);
-				if ($_SESSION['loggedIn']==2) $emprunt="emprunté par quelqu'un.";
-				if ($_SESSION['loggedIn']==1) $emprunt="Indisponible";
-				if ($_SESSION['loggedIn']==0) $emprunt="Indisponible";
+				if ($_SESSION['loggedIn']==2) $emprunt='emprunté par <b>'.$array2["trigramme"].'</b>.<form action="index.php?page=administration" method="post"><input type="hidden" name="action2" value="gérer"><input type="hidden" name="trigramme" value="'.$array2["trigramme"].'"><input type="submit" value="Voir" style="margin-bottom:2px; width:70px"></form><form action="" method="post"><input type="hidden" name="action" value="rendre"><input type="hidden" name="codelettres" value="'.$code.'"><input type="hidden" name="numero" value="'.$numer.'"><input type="submit" value="Rendre" style="width:70px"></form>';
+				if ($_SESSION['loggedIn']==1) $emprunt='Indisponible';
+				if ($_SESSION['loggedIn']==0) $emprunt='Indisponible';
 		}
 		else {
 				if ($_SESSION['loggedIn']==1) $emprunt='Disponible<form action="index.php?page=madiskhale" method="post" name="emprunt"><input type="hidden" name="action" value="emprunter"><input type="hidden" name="numero" value="'.$row["numero"].'"><input type="hidden" name="categorie" value="'.$row["categorie"].'"><input type="hidden" name="codelettres" value="'.$row["codelettres"].'"><input type="submit" value="emprunter"></form>';
@@ -187,30 +111,7 @@ if($_SESSION['loggedIn']==2){
 		
     	echo '<table border="0" width="900" style="margin:20px; margin-bottom:5px"><tr><td width="20" valign="top">'.$numero.'.</td>
 		<td valign="top"><h3>'.$row["oeuvres"].'</h3>'.$row["compositeurs"].'<p style="font-size:11px;">';if ($row["interpretes"]!="") echo 'interprété par : '.$row["interpretes"];echo'</p><p style="color:#888888">'.$categorie.' &nbsp; | &nbsp; '.$row["codelettres"].' &nbsp; | &nbsp; '.$row["numero"].' </p></td><td width="170" bgcolor="#dddddd" style="border-left-style:solid; border-left-color:#444444"><div align="center">'.$emprunt.'</div></td></tr></table>';
-
-          /*            $tri=$tab['trigramme'];
-                      $strtri="SELECT * FROM `clients` WHERE `trigramme`='$tri'";
-                      $quertri=mysql_query($strtri);
-					  $emprunt="dispo";
-                      while($tab2=mysql_fetch_assoc($quertri)){
-                          if($_SESSION['loggedIn']==2){
-                              $emprunt="emprut&eacute; par ".'<a href=\"index.php?page=traiter\"/>'.$tab2['nom']." ".$tab2['prenom'].'</a><br />'.'<br />';  //revoir la mise en page corriger le nom de la page du lien
-                          }
-                          elseif ($_SESSION['loggedIn']==1) {
-                              $emprunt="indisponible";    //revoir la mise en page
-
-                          }
-                          
-                      } */
                 }
-
-
-
-
-
-
-
-
 		echo '</div><div id="headresultats" style="background-color:#444444; height:20px">';
 		if ($totalpages>1) {
 		if ($num<$totalpages) {
@@ -242,5 +143,3 @@ if($_SESSION['loggedIn']==2){
 		}    
 
 	?>
-
-
