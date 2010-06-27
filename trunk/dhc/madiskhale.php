@@ -131,10 +131,10 @@
 						$dateresult=mysql_query($datequery);
 						$datearray=mysql_fetch_array($dateresult);
 						$delai=$datearray[0];
-                        if ($delai>4) echo '<div id="disques2">'; else echo '<div id="disques">';
+                        if ($delai>21) echo '<div id="disques2">'; else echo '<div id="disques">';
                         echo ' <b>'.$array3["oeuvres"].'</b><br />'.$array3["compositeurs"].'<br /><font color="#cccccc">'.$array3["categorie"].' | '.$array3["codelettres"].' | '.$array3["numero"].'</font><br /><br style="line-height:10px;" /><font color="#ffffff">Emprunté le : '.$array2["dateemprunt"];
 						
-						if ($delai>4) echo ' &nbsp; :: &nbsp; <b>Retard : '.($delai-4).' jours !</b>';
+						if ($delai>21) echo ' &nbsp; :: &nbsp; <b>Retard : '.($delai-21).' jours !</b>';
 						
 						echo '</font>
                                         </div>';
@@ -147,4 +147,4 @@
                                 }
 
         ?>
-		<div id="infos" style="height:30px;margin-top:2px;">&shy;</div>
+		<div id="infos" style="height:80px;margin-top:2px;">&shy;</div>

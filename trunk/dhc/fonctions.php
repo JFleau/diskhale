@@ -46,7 +46,7 @@ if ($_SESSION['loggedIn']==1) {
 	}
 if ($_SESSION['loggedIn']==2) {
 	if ($page=="accueil"||$page=="administration"||$page=="recherche"
-            || $page=="recherche_user" || $page=="retardataires") $authorized=true; else $authorized=false;
+            || $page=="ddm" || $page=="retardataires") $authorized=true; else $authorized=false;
 	}
 
 return $authorized;
@@ -283,11 +283,6 @@ function emprunter($trigramme){
 		else return "Vous ne pouvez pas détenir plus de 5 disques simultanément.";
 }
 
-
-
-
-
-
 function modifier($trigramme){
 
     $a=array("password","password2","trigramme2","kazert","telephone","nom","prenom",
@@ -295,9 +290,14 @@ function modifier($trigramme){
 
     //$trigramme=$_SESSION['trigramme'];
     if($_SESSION['loggedIn']==2 || (isset($_POST[$a[14]]) && $_POST[$a[14]]!="")){
-
+	
+		if ($_SESSION['loggedIn']==1) {
         $pwd=$_POST[$a[14]];
-        $s="SELECT * FROM `clients` WHERE `trigramme`='$trigramme' AND `password`='$pwd'";
+        $s="SELECT * FROM `clients` WHERE `trigramme`='$trigramme' AND `password`='".$pwd."'";
+		}
+		if ($_SESSION['loggedIn']==2) {
+        $s="SELECT * FROM `clients` WHERE `trigramme`='$trigramme'";
+		}
         $se=mysql_query($s);
         $re=mysql_numrows($se);
                 if($re==0 && $_SESSION['loggedIn']!=2){
@@ -362,16 +362,85 @@ function modifier($trigramme){
     elseif(isset($_POST['action']) && $_POST['action']=='modifier'){
         return "Mot de passe incorrect.";
     }
-
-
-
-    
-
-
-    
 }
 
+function ajmod(){
+    $a=array("categorie","compositeurs","oeuvres","interpretes","remarques");
+    $b=array("categorie_m","artiste_m","oeuvre_m","interprete_m","remarques_m");
 
 
+    if(isset($_POST['codem']) && isset($_POST['numerom'])
+       && $_POST['codem']!="" && $_POST['numerom']!=""){
+       $code=$_POST['codem'];
+       $numero=$_POST['numerom'];
+       $query="SELECT * FROM `disques` WHERE `codelettres`= '".$code."' AND `numero`= '".$numero."'";
+       $rquery=mysql_query($query);
+       $res=mysql_numrows($rquery);
+       if($res==0){
+
+           if(isset($_POST['categorie_m']) && $_POST['categorie_m']!=""
+                && isset($_POST['interprete_m']) && $_POST['interprete_m']!=""
+                && isset($_POST['oeuvre_m']) && $_POST['oeuvre_m']!=""
+                && isset($_POST['artiste_m']) && $_POST['artiste_m']!=""){
+
+                $categorie=$_POST['categorie_m'];
+                $interpretes=$_POST['interprete_m'];
+                $oeuvre=$_POST['oeuvre_m'];
+                $artiste=$_POST['artiste_m'];
+                if(isset($_POST['remarques_m'])) {$remarques=$_POST['remarques_m'];} else $remarques="";
+                $query2="INSERT INTO `disques`(`codelettres`,`numero`,`categorie`,`compositeurs`,
+            `oeuvres`,`interpretes`,`remarques`) VALUES ('".$code."', '".$numero."', '".
+                $categorie."','".$artiste."','".$oeuvre."','".$interpretes."','".$remarques."')";  //a modifier
+                if (!mysql_query($query2)) return 'Erreur SQL '.mysql_error().': '.$query2;
+           }
+
+           else{
+               ?>
+                <!--<div id="infos" style="height:310px;">-->
+                    <p>Formulaire mal rempli</p>
+                <!--</div>-->
+
+               <?php
+
+           }
+
+        }
+        else{
+            for($i=0;$i<5;$i++){
+                if(isset($_POST[$b[$i]]) && $_POST[$b[$i]]!=""){
+                    $cle=$_POST[$b[$i]];
+                    $val=$a[$i];
+                    $query3="UPDATE `disques` SET `$val`='$cle' WHERE `codelettres`='".$code."' AND `numero`='".$numero."'";
+                    if (!mysql_query($query3)) return 'Erreur SQL '.mysql_error().': '.$query3;
+
+                    if($b[$i]=="categorie_m"){
+                        $query4="UPDATE `emprunts` SET `$val`='$cle' WHERE `codelettres`='".$code."' AND `numero`='".$numero."'";
+                        if (!mysql_query($query4)) return 'Erreur SQL '.mysql_error().': '.$query4;
+                    }
+
+                }
+            }
+
+        }
+
+
+    }
+    else{
+        $y=0;
+        for($i=0;$i<5;$i++){
+                if(isset($_POST[$b[$i]]) && $_POST[$b[$i]]!=""){
+                    $y++;
+                }
+        }
+        if($y>0){
+
+        ?>
+        <!--<div id="infos" style="height:310px;">-->
+            <p>Donnez un disque valide</p>
+        <!--</div>-->
+        <?php
+        }
+    }
+}
 
 ?>
